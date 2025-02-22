@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="[6]___________[ Template ]">
+      <UniqueIdentifier>{a0f3d2c9-d45e-42c5-ac1f-c1a53d8811ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[1]___________[ GameMode ]">
+      <UniqueIdentifier>{824d0f24-8e5b-4c58-99e5-e019f51ea99a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[2]___________[ Object ]">
+      <UniqueIdentifier>{56801dea-cc93-4de6-be84-193b881c5076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[3]___________[ Camera ]">
+      <UniqueIdentifier>{a94ebc27-9b04-4c84-b876-bb9fcb87cae4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[0]___________[ Config ]">
+      <UniqueIdentifier>{c229d7fb-288d-4e48-b8b0-7e7dbd38a78d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[1]___________[ GameMode ]\[1]_[ Modes ]">
+      <UniqueIdentifier>{8f517fc9-5b73-4fde-859b-a7d4c4bad5e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[1]___________[ GameMode ]\[0]_[ Mode  Attributes ]">
+      <UniqueIdentifier>{e5570cb2-8557-4f05-9d45-ce94e1bf6e24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[4]___________[ Resource ]">
+      <UniqueIdentifier>{a23e0c3a-d6ca-4199-bc98-de8c1d7c55be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[3]___________[ Camera ]\[ Camera ]">
+      <UniqueIdentifier>{9990af27-0b07-48b1-ab0a-58b277843e13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]">
+      <UniqueIdentifier>{7f6a4887-d06e-4c65-963d-2b7d61cea12c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Header ]">
+      <UniqueIdentifier>{2f35df9f-153e-4b4a-906d-058f259a0979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ System Mode ]">
+      <UniqueIdentifier>{9d92d68b-96f8-4a78-90d4-bd16df8b7372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ System Object ]">
+      <UniqueIdentifier>{c8dde2fb-f4fd-4595-9cdf-614100ed40cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ System Resource ]">
+      <UniqueIdentifier>{60990a8d-71aa-447d-aab7-dfa6b035b3b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Main ]">
+      <UniqueIdentifier>{0db3b7f8-93be-4b88-bfa5-da8ad252be70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Object ]">
+      <UniqueIdentifier>{f67944b9-c91f-464e-976e-0b8958cf7ab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Object ]\[ Object Value ]">
+      <UniqueIdentifier>{8b8a436e-7668-404f-9fa0-864c2eec418e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Shader ]">
+      <UniqueIdentifier>{37be597c-421f-49a1-a552-2dfe31eea27a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]">
+      <UniqueIdentifier>{4eec4c3d-2375-48d7-85d7-413e0553d75c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Pack ]">
+      <UniqueIdentifier>{4ac8fdab-c6e0-4a90-83ec-beeca66a9ba4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]">
+      <UniqueIdentifier>{019278b2-60d4-4cad-b935-d813a31f2c87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]">
+      <UniqueIdentifier>{30875c24-7d24-492f-89bd-a5ed537d6bdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Timer ]">
+      <UniqueIdentifier>{6c809ee9-0b72-4df6-a180-049726371c03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Text ]">
+      <UniqueIdentifier>{ebbafb29-e74d-4f67-ae00-7ab61d0dd40e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Shape ]">
+      <UniqueIdentifier>{74b0aa9a-a87c-4a17-bdd5-d4f93ac8a450}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Shape ]\[ Line ]">
+      <UniqueIdentifier>{186e77d4-d667-4ca8-a7db-0c4ff78a4275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Shape ]\[ Rect ]">
+      <UniqueIdentifier>{1717a6b1-c315-40dc-a9e1-71209e40100b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Shape ]\[ Circle ]">
+      <UniqueIdentifier>{8ca8864d-f116-4649-ac79-d0c373874068}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Physics ]">
+      <UniqueIdentifier>{63469aed-9fc3-41f7-bbf0-32d2050b40a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Data ]">
+      <UniqueIdentifier>{d2e93683-5de8-4639-98b5-ff99bff6c54f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Script ]">
+      <UniqueIdentifier>{81f53a74-031c-406e-82e2-a9d6a7f85d59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Animation ]">
+      <UniqueIdentifier>{4850e16c-dcfa-4087-ac33-4dcbebf53e98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Collision ]">
+      <UniqueIdentifier>{4048cd52-6e69-47f1-ad3d-07de4f88f83e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]">
+      <UniqueIdentifier>{61b7533a-082a-4ffc-915c-ee26f517dcc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ UI ]">
+      <UniqueIdentifier>{4bc61999-6038-4873-89f1-097ff59edac5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Transform ]">
+      <UniqueIdentifier>{97cfbf89-8ee3-4d67-b4fb-aed1f7833e3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Thread ]">
+      <UniqueIdentifier>{7fd964a6-1f53-4574-8c6f-a2bbbea7a889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ String ]">
+      <UniqueIdentifier>{0d426163-3f7a-4344-9513-1c4da459934c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Sound ]">
+      <UniqueIdentifier>{22512964-c0e1-42b6-8ae0-9c32d227bc22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Random ]">
+      <UniqueIdentifier>{a260c5f1-65f3-4ff6-afa8-97676fbd2054}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Move ]">
+      <UniqueIdentifier>{a3986c5c-3d03-4f63-ba7d-4f37ac97802a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Mouse ]">
+      <UniqueIdentifier>{3fbba05c-17d5-4a1e-9a94-8c237067a9a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Math ]">
+      <UniqueIdentifier>{4a85a4fd-aaad-4cd4-9601-add0201898fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Image ]">
+      <UniqueIdentifier>{fa74e18f-898f-4b61-addd-ca55a9892895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Frustum ]">
+      <UniqueIdentifier>{c0d402a3-6a02-46a7-9a5d-b38ba1216622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Font ]">
+      <UniqueIdentifier>{f2cdada2-a380-46fd-8cf3-b9ff333dcc11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ EX ]">
+      <UniqueIdentifier>{7143f403-e5d1-41d0-946b-ebb32ffaf2ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Compute ]">
+      <UniqueIdentifier>{f7456d94-6103-44fc-b1c5-33fe9e736f54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Clipping ]">
+      <UniqueIdentifier>{9bceb82f-2ade-4d6d-9360-521458e8d522}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Misc ]">
+      <UniqueIdentifier>{da528397-a6f0-4ef8-bcab-e3ea98bb5f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Misc ]\[ TinyXML ]">
+      <UniqueIdentifier>{b411906d-dba6-43b2-9fb9-8fdc86ab615a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Misc ]\[ TinyXML ]\[ Header ]">
+      <UniqueIdentifier>{0e3bd161-f85a-4c63-9fec-ca808700d64f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Misc ]\[ TinyXML ]\[ CPP ]">
+      <UniqueIdentifier>{8687cc53-1f7c-47a2-a2ed-4388623b0fa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[5]___________[ SDK_System ]\[ Scene ]">
+      <UniqueIdentifier>{f7b86d35-cb50-4352-9482-a8fb321f19f4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\Library\tinyxml\tinystr.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Misc ]\[ TinyXML ]\[ CPP ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Library\tinyxml\tinyxml.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Misc ]\[ TinyXML ]\[ CPP ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Library\tinyxml\tinyxmlerror.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Misc ]\[ TinyXML ]\[ CPP ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Library\tinyxml\tinyxmlparser.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Misc ]\[ TinyXML ]\[ CPP ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Shader.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Shader ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Scene.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Scene ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_SoundTool.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Sound ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_AnimationTool.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Animation ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Camera.cpp">
+      <Filter>[3]___________[ Camera ]\[ Camera ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_CameraController.cpp">
+      <Filter>[3]___________[ Camera ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_CircleBrush.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Shape ]\[ Circle ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_ClippingTool.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Clipping ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Collision.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Collision ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_ComputeTool.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Compute ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Data.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Data ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Display.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Main ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_FontLoader.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Font ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Frustum.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Frustum ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_ImageTool.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Image ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_LineBrush.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Shape ]\[ Line ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Math.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Math ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Main.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Main ]</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK_ModeAttribute.cpp">
+      <Filter>[1]___________[ GameMode ]\[0]_[ Mode  Attributes ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Mouse.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Mouse ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_MoveTool.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Move ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Object.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Object ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_ObjectValue.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Object ]\[ Object Value ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Physics.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Physics ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Random.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Random ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_RectBrush.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Shape ]\[ Rect ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_ResourceLoader.cpp">
+      <Filter>[4]___________[ Resource ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Script.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Script ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_SetUp.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Main ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_StringTool.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ String ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_SystemMode.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ System Mode ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Text.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Text ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_ThreadTool.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Thread ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Timer.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Timer ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_Transform.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Transform ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_UITool.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ UI ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SDK_EXTool.cpp">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ EX ]</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\Library\tinyxml\tinystr.h">
+      <Filter>[5]___________[ SDK_System ]\[ Misc ]\[ TinyXML ]\[ Header ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Library\tinyxml\tinyxml.h">
+      <Filter>[5]___________[ SDK_System ]\[ Misc ]\[ TinyXML ]\[ Header ]</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleMode.h">
+      <Filter>[1]___________[ GameMode ]\[1]_[ Modes ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Shader.h">
+      <Filter>[5]___________[ SDK_System ]\[ Shader ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Scene.h">
+      <Filter>[5]___________[ SDK_System ]\[ Scene ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_SoundTool.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Sound ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_AnimationTool.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Animation ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Camera.h">
+      <Filter>[3]___________[ Camera ]\[ Camera ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_CameraController.h">
+      <Filter>[3]___________[ Camera ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_CircleBrush.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Shape ]\[ Circle ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_ClippingTool.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Clipping ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Collision.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Collision ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_ComputeTool.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Compute ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Config.h">
+      <Filter>[0]___________[ Config ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Data.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Data ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_EXTool.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ EX ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_ErrorMessage.h">
+      <Filter>[5]___________[ SDK_System ]\[ System Object ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_FontLoader.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Font ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Frustum.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Frustum ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_FPSIndicator.h">
+      <Filter>[5]___________[ SDK_System ]\[ System Object ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Header.h">
+      <Filter>[5]___________[ SDK_System ]\[ Header ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_ImageTool.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Image ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_IntroMode.h">
+      <Filter>[5]___________[ SDK_System ]\[ System Mode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_IntroScreen.h">
+      <Filter>[5]___________[ SDK_System ]\[ System Object ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_LineBrush.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Shape ]\[ Line ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_LoadingScreen.h">
+      <Filter>[5]___________[ SDK_System ]\[ System Object ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_LoadingMode.h">
+      <Filter>[5]___________[ SDK_System ]\[ System Mode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Math.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Math ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_ModeHeader.h">
+      <Filter>[5]___________[ SDK_System ]\[ Header ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_ModeResource.h">
+      <Filter>[1]___________[ GameMode ]\[0]_[ Mode  Attributes ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Mouse.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Mouse ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_MoveTool.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Move ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Object.h">
+      <Filter>[5]___________[ SDK_System ]\[ Object ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_ObjectValue.h">
+      <Filter>[5]___________[ SDK_System ]\[ Object ]\[ Object Value ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Physics.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Physics ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Random.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Random ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_RectBrush.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Shape ]\[ Rect ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Resource.h">
+      <Filter>[4]___________[ Resource ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Script.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Script ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_StringTool.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ String ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_SystemResource.h">
+      <Filter>[5]___________[ SDK_System ]\[ System Resource ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Text.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Text ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_ThreadTool.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Thread ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Timer.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Object Tool ]\[ Timer ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_Transform.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ Transform ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_UITool.h">
+      <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ UI ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_UtilPack.h">
+      <Filter>[5]___________[ SDK_System ]\[ Pack ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\SDK_EnumValue.h">
+      <Filter>[4]___________[ Resource ]</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ModeTemplate.txt">
+      <Filter>[6]___________[ Template ]</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SDKResource\GLSL\ComputeMatrix.glsl">
+      <Filter>[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]</Filter>
+    </None>
+    <None Include="SDKResource\GLSL\Fragment_Image.glsl">
+      <Filter>[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]</Filter>
+    </None>
+    <None Include="SDKResource\GLSL\Fragment_Shape.glsl">
+      <Filter>[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]</Filter>
+    </None>
+    <None Include="SDKResource\GLSL\Fragment_Text.glsl">
+      <Filter>[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]</Filter>
+    </None>
+    <None Include="SDKResource\GLSL\Vertex.glsl">
+      <Filter>[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]</Filter>
+    </None>
+  </ItemGroup>
+</Project>
