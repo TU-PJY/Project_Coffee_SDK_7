@@ -185,6 +185,7 @@ public:
 			MenuPage = ExitPage;
 	}
 
+	// 나가기 페이지 메뉴 입력
 	void InputExitPage(SDK::KeyEvent& Event) {
 		if (Event.Key == VK_UP || Event.Key == VK_DOWN) {
 			// 방향키 위를 누르면 감소, 아래를 누르면 증가
