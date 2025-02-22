@@ -38,7 +38,7 @@ void SDK::Timer::Interpolate(float Value) {
 }
 
 bool SDK::Timer::UpdateAndCheckSec(int DestTime, int CheckOption, float FrameTime) {
-	Time += FrameTime;
+	Update(FrameTime);
 
 	if (Sec() >= DestTime) {
 		switch (CheckOption) {
@@ -64,8 +64,8 @@ bool SDK::Timer::UpdateAndCheckSec(int DestTime, int CheckOption, float FrameTim
 	return false;
 }
 
-bool SDK::Timer::UpdateAndCheckMiliSec(int DestTime, int DemicalPlace, int CheckOption, float FrameTime) {
-	Time += FrameTime;
+bool SDK::Timer::UpdateAndCheckMiliSec(float DestTime, int DemicalPlace, int CheckOption, float FrameTime) {
+	Update(FrameTime);
 
 	if (MiliSec(DemicalPlace) >= DestTime) {
 		switch (CheckOption) {
@@ -95,20 +95,22 @@ bool SDK::Timer::CheckSec(int DestTime, int CheckOption) {
 	if (Sec() >= DestTime) {
 		switch (CheckOption) {
 		case CHECK_AND_RESUME:
-			return true;
+			break;
 
 		case CHECK_AND_RESET:
 			Reset();
-			return true;
+			break;
 
 		case CHECK_AND_INTERPOLATE:
 			Interpolate((float)DestTime);
-			return true;
+			break;
 
 		case CHECK_AND_STOP:
 			Stop();
-			return true;
+			break;
 		}
+
+		return true;
 	}
 
 	return false;
@@ -118,20 +120,22 @@ bool SDK::Timer::CheckMiliSec(float DestTime, int DemicalPlace, int CheckOption)
 	if (MiliSec(DemicalPlace) >= DestTime) {
 		switch (CheckOption) {
 		case CHECK_AND_RESUME:
-			return true;
+			break;
 
 		case CHECK_AND_RESET:
 			Reset();
-			return true;
+			break;
 
 		case CHECK_AND_INTERPOLATE:
 			Interpolate(DestTime);
-			return true;
+			break;
 
 		case CHECK_AND_STOP:
 			Stop();
-			return true;
+			break;
 		}
+
+		return true;
 	}
 	return false;
 }

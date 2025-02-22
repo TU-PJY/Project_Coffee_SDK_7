@@ -104,7 +104,7 @@ namespace SDK {
 		};
 
 		DataFormat UserSettings = {
-			{DATA_TYPE_DIGIT, "Setting", "Fullscreen", 1, ""},
+			{DATA_TYPE_DIGIT, "Setting", "Fullscreen", 0, ""},
 			{DATA_TYPE_DIGIT, "Setting", "BGMVolume", 1.0, ""},
 			{DATA_TYPE_DIGIT, "Setting", "SFXVolume", 1.0, ""}
 		};
@@ -160,7 +160,7 @@ namespace SDK {
 
 	// Declare the global font name here.
 	struct SDK_FONT_NAME_RESOURCE {
-		FontName Main = L"픽셀로보로보";
+		FontName Main = L"픽셀로보로보체";
 	};
 
 	extern SDK_IMAGE_RESOURCE IMAGE;

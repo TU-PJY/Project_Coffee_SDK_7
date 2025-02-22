@@ -163,6 +163,9 @@
     <Filter Include="[5]___________[ SDK_System ]\[ Scene ]">
       <UniqueIdentifier>{f7b86d35-cb50-4352-9482-a8fb321f19f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[2]___________[ Object ]\[ Play Mode ]">
+      <UniqueIdentifier>{35fb2e79-c393-494c-bd47-8a6b270a5010}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Library\tinyxml\tinystr.cpp">
@@ -433,6 +436,9 @@
     </ClInclude>
     <ClInclude Include="Src\SDK_EnumValue.h">
       <Filter>[4]___________[ Resource ]</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScreen.h">
+      <Filter>[2]___________[ Object ]\[ Play Mode ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -134,6 +134,9 @@ DWORD WINAPI FileResourceLoader(LPVOID lpParam) {
 	SDK::GLOBAL.MaxRep = SDK::FILE.HighscoreData.LoadDigitData("HighScore", "Rep");
 	SDK::GLOBAL.NeedTutorial = SDK::FILE.HighscoreData.LoadDigitData("TutorialNeed", "Bool");
 
+	SDK::SoundTool.SetVolume(SDK::CHANNEL.BGM, SDK::GLOBAL.BGMVolume);
+	SDK::SoundTool.SetVolume(SDK::CHANNEL.SFX, SDK::GLOBAL.SFXVolume);
+
 	return 0;
 }
 

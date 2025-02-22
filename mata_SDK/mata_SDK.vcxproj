@@ -232,6 +232,7 @@
     <ClInclude Include="Src\SDK_UITool.h" />
     <ClInclude Include="Src\SDK_UtilPack.h" />
     <ClInclude Include="Src\SDK_ModeResource.h" />
+    <ClInclude Include="TitleScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ModeTemplate.txt" />

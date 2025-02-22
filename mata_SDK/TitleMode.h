@@ -1,6 +1,8 @@
 #pragma once
 #include <SDK_ModeHeader.h>
 
+#include "TitleScreen.h"
+
 class TitleMode {
 public:
 	// define mode name and mode type here
@@ -9,6 +11,8 @@ public:
 
 	static void Start() {
 		SetUp();
+		SDK::System.SetBackColorRGB(122, 138, 154);
+		SDK::Scene.AddObject(new TitleScreen(false), "title_screen", LAYER1, true);
 	}
 
 	static void Destructor() {

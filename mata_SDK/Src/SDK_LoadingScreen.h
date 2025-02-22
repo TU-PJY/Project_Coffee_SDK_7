@@ -38,6 +38,9 @@ public:
 			SDK::FontLoader.LoadT(SDK::SYSRES.SDK_FONT_DIRECTORY);
 			SDK::ImageTool.LoadImage(SDK::SYSRES.LOADING_SPINNER, SDK::SYSRES.SDK_LOADING_SPINNER_DIRECTORY, IMAGE_TYPE_LINEAR);
 			SDK::ImageTool.LoadImage(SDK::SYSRES.MATA_LOGO, SDK::SYSRES.MATA_LOGO_IMAGE_DIRECTORY, IMAGE_TYPE_LINEAR);
+			
+			SDK::ImageTool.LoadImage(SDK::IMAGE.Title, "Assets//Sprite//UI//title.png");
+			SDK::ImageTool.LoadImage(SDK::IMAGE.LoadingED, "Assets//Sprite//People//ed-loading.png");
 
 			SDK::ThreadTool.Create(SystemResourceLoadHandle, SystemResourceLoader);
 

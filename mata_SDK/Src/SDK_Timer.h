@@ -17,7 +17,7 @@ namespace SDK {
 		float MiliSec(int DemicalPlace = 1);
 		void Interpolate(float Value);
 		bool UpdateAndCheckSec(int DestSec, int CheckOption, float FrameTime);
-		bool UpdateAndCheckMiliSec(int DestTime, int DemicalPlace, int CheckOption, float FrameTime);
+		bool UpdateAndCheckMiliSec(float DestTime, int DemicalPlace, int CheckOption, float FrameTime);
 		bool CheckSec(int DestTime, int CheckOption);
 		bool CheckMiliSec(float DestTime, int DemicalPlace, int CheckOption);
 		float GetCurrentTime();
