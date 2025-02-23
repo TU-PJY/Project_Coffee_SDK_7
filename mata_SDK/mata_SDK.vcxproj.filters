@@ -163,8 +163,20 @@
     <Filter Include="[5]___________[ SDK_System ]\[ Scene ]">
       <UniqueIdentifier>{f7b86d35-cb50-4352-9482-a8fb321f19f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="[2]___________[ Object ]\[ Play Mode ]">
+    <Filter Include="[2]___________[ Object ]\[ Title Mode ]">
       <UniqueIdentifier>{35fb2e79-c393-494c-bd47-8a6b270a5010}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[2]___________[ Object ]\[ PlayMode ]">
+      <UniqueIdentifier>{9811945e-64bb-44c2-956c-b6f6c459eeac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[2]___________[ Object ]\[ PlayMode ]\[ Xion ]">
+      <UniqueIdentifier>{30a5eb69-c353-485f-8c38-b51a61ba968c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[2]___________[ Object ]\[ PlayMode ]\[ Cart ]">
+      <UniqueIdentifier>{5b53b2e8-0c45-4f9b-9b35-ae21750d0d61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="[2]___________[ Object ]\[ Misc ]">
+      <UniqueIdentifier>{0d217472-ce87-4811-a58d-1fe6e793b177}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -290,6 +302,15 @@
     </ClCompile>
     <ClCompile Include="Src\SDK_EXTool.cpp">
       <Filter>[5]___________[ SDK_System ]\[ Tool ]\[ Global Tool ]\[ EX ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Xion.cpp">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]\[ Xion ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Cart.cpp">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]\[ Cart ]</Filter>
+    </ClCompile>
+    <ClCompile Include="Cover.cpp">
+      <Filter>[2]___________[ Object ]\[ Misc ]</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -438,7 +459,58 @@
       <Filter>[4]___________[ Resource ]</Filter>
     </ClInclude>
     <ClInclude Include="TitleScreen.h">
-      <Filter>[2]___________[ Object ]\[ Play Mode ]</Filter>
+      <Filter>[2]___________[ Object ]\[ Title Mode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundShelf.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Shelf.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Pillar.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="DestroyedCan.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Explode.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="People.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Xion.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]\[ Xion ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Smoke.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Cart.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]\[ Cart ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Cover.h">
+      <Filter>[2]___________[ Object ]\[ Misc ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeWatch.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayModeManager.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="ED.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayMode.h">
+      <Filter>[1]___________[ GameMode ]\[1]_[ Modes ]</Filter>
+    </ClInclude>
+    <ClInclude Include="CountDown.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="Floor.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

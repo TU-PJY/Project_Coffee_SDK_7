@@ -110,6 +110,7 @@ void SDK::SDK_SoundTool::PlayOnce(SDK::Sound& Sound, SDK::SoundChannel& ChannelV
 		ChannelVar.Channel->setPosition(Time * 1000, FMOD_TIMEUNIT_MS);
 		ChannelVar.Channel->setVolume(ChannelVar.Volume);
 		ChannelVar.Channel->setPitch(ChannelVar.PlaySpeed);
+		BoolValue = true;
 	}
 }
 

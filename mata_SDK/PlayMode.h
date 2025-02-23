@@ -1,25 +1,77 @@
 #pragma once
 #include <SDK_ModeHeader.h>
 
-#include "Pillar.h"
-#include "BackgroundShelf.h"
-#include "TitleScreen.h"
+#include "ED.h"
 #include "Shelf.h"
+#include "Cart.h"
+#include "Xion.h"
+#include "Floor.h"
+#include "TimeWatch.h"
+#include "Score.h"
+#include "CountDown.h"
+#include "PlayModeManager.h"
+#include "BackgroundShelf.h"
+#include "Pillar.h"
 
-class TitleMode {
+
+class PlayMode {
 public:
-	// define mode name and mode type here
-	std::string ModeName { "TitleMode" };
-	int         ModeType { MODE_TYPE_DEFAULT };
+	std::string ModeName{ "PlayMode" };
+	int         ModeType{ MODE_TYPE_DEFAULT };
+
+	/////////////////////////////////////////////////////////////
 
 	static void Start() {
 		SetUp();
+
 		SDK::System.SetBackColorRGB(122, 138, 154);
 
+		// 이전에 파괴했던 개수 초기화
+		for (int i = 0; i < 6; i++)
+			SDK::GLOBAL.DestroyedItems[i] = 0;
+
+		// 점수 초기화
+		SDK::GLOBAL.Score = 0;
+
+		// 최고 기록 달성 여부 초기화
+		SDK::GLOBAL.IsHighScore = false;
+		SDK::GLOBAL.IsHighRep = false;
+
+		// 사람 생성 가능 여부 초기화
+		for (int i = 0; i < 10; i++) {
+			SDK::GLOBAL.PrevChFrame[i] = 0;
+			SDK::GLOBAL.CreateAvailable[i] = true;
+		}
+
+		// 게임 오버 상태 초기화
+		SDK::GLOBAL.GameOver = false;
+
+		SDK::Scene.AddObject(new PlayModeManager, "play_mode_manager", LAYER1, true);
+
 		SDK::Scene.AddObject(new Pillar(1.0), "pillar", LAYER_BG);
-		SDK::Scene.AddObject(new BackgroundShelf(SDK::ASP(-1.0)), "background_shelf", LAYER1);
-		SDK::Scene.AddObject(new Shelf(2, 1.75, true), "shelf", LAYER2);
-		SDK::Scene.AddObject(new TitleScreen(true), "title_screen", LAYER2, true);
+
+		// 타일 추가
+		GLfloat Position = SDK::ASP(-1.0) - 1.6;
+		while (true) {
+			SDK::Scene.AddObject(new Floor(Position, true), "floor", LAYER_BG);
+			Position += 0.8;
+
+			if (Position > SDK::ASP(1.0) + 0.8) {
+				SDK::Scene.AddObject(new Floor(Position, false), "floor", LAYER_BG);
+				break;
+			}
+		}
+
+		SDK::Scene.AddObject(new BackgroundShelf(0.0), "background_shelf", LAYER1);
+
+		SDK::Scene.AddObject(new Shelf(2, 1.75), "shelf", LAYER2);
+		SDK::Scene.AddObject(new Xion(-1.0, 0.0, false, Xion_Cry1), "xion", LAYER3);
+		SDK::Scene.AddObject(new ED, "ed", LAYER3, true);
+		SDK::Scene.AddObject(new Cart(true, glm::vec2(0.8, -0.35)), "cart", LAYER4);
+
+		SDK::Scene.AddObject(new TimeWatch, "time_watch", LAYER7);
+		SDK::Scene.AddObject(new ScoreIndicator, "score_indicator", LAYER7);
+		SDK::Scene.AddObject(new CountDown, "countdown", LAYER7);
 	}
 
 	static void Destructor() {
@@ -28,9 +80,9 @@ public:
 	/////////////////////////////////////////////////////////////
 #pragma region FoldRegion 
 	std::vector<SDK::Object*> InputObject{};
-	inline static TitleMode* M_Inst;
+	inline static PlayMode* M_Inst;
 
-	TitleMode() { M_Inst = this; }
+	PlayMode() { M_Inst = this; }
 
 	static void Map(SDK::MODE_PTR& Mode) {
 		Mode = Start;

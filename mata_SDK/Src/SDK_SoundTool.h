@@ -33,7 +33,7 @@ namespace SDK {
 		void SetGroupPlaySpeed(SDK::SoundChannelGroup& Group, float Speed);
 		void PauseGroup(SDK::SoundChannelGroup& Group, bool Flag);
 		void Play(SDK::Sound& Sound, SDK::SoundChannel& ChannelVar, float Time = 0.0);
-		void Play(SDK::Sound& Sound, SDK::FastSoundChannel& ChannelVar, float Time);
+		void Play(SDK::Sound& Sound, SDK::FastSoundChannel& ChannelVar, float Time=0.0);
 		void PlayOnce(SDK::Sound& Sound, SDK::SoundChannel& ChannelVar, bool& BoolValue, float Time = 0.0);
 		void Pause(SDK::SoundChannel& ChannelVar, bool Flag);
 		void Stop(SDK::SoundChannel& ChannelVar);

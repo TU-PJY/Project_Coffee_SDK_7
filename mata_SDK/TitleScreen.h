@@ -148,6 +148,47 @@ public:
 		RenderUI();
 	}
 
+	// 타이틀 화면 세팅
+	void SetTitleScreen(bool IsIntroPlayed) {
+		// 인트로 플레이 여부
+		// 인트로를 이미 플레이 했다면 인트로 애니메이션을 실행하지 않는다.
+		if (IsIntroPlayed) {
+			IntroPlayState = false;
+
+			// 인트로 애니메이션이 모두 진행된 상태로 초기화 한다.
+			TitleActivateState = true;
+			TitleTextRenderState = true;
+			TitleTextHorizontalOffset = 0.0;
+			TitleImagePosition = SDK::Vector2(SDK::ASP(1.0) - 0.45, -1.0 + 0.2);
+			TitleImageSize = 1.0;
+
+			// 카메라 위치 지정
+			TitleCameraPosition = SDK::Vector2(0.7, 0.4);
+			TitleCameraZoom = 1.5;
+			SDK::CameraControl.Move(0.7, 0.4);
+			SDK::CameraControl.SetZoom(1.5);
+		}
+
+		// 타이틀 모드로 최초 진입했다면 인트로 애니메이션을 플레이 한다
+		else {
+			IntroPlayState = true;
+
+			TitleTextRenderState = false;
+			TitleTextHorizontalOffset = 3.0;
+			TitleImagePosition = SDK::Vector2(0.0, 0.5);
+			TitleImageSize = 1.8;
+
+			// 카메라 위치 지정
+			TitleCameraPosition = SDK::Vector2(-1.3, 0.4);
+			TitleCameraZoom = 2.0;
+			SDK::CameraControl.Move(-1.3, 0.4);
+			SDK::CameraControl.SetZoom(2.0);
+
+			TitleCameraPositionMove.SetMovePoint(TitleCameraPosition, SDK::Vector2(0.7, 0.4));
+			TitleCameraZoomMove.SetMovePoint(TitleCameraZoom, 1.5);
+		}
+	}
+
 	// 타이틀 활성화 전 메뉴 입력
 	void InputFrontPage(SDK::KeyEvent& Event) {
 		auto Exit = [&]() {
@@ -282,7 +323,7 @@ public:
 			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 
-		if (0 < OptionPageIndex && OptionPageIndex < 4 && (Event.Key == VK_RIGHT || Event.Key == VK_LEFT)) {
+		if ((0 < OptionPageIndex && OptionPageIndex < 4) && (Event.Key == VK_RIGHT || Event.Key == VK_LEFT)) {
 			switch (OptionPageIndex) {
 			case 1:
 				SDK::EXTool.SwitchBool(SDK::GLOBAL.FullscreenAcvivated);
@@ -305,7 +346,7 @@ public:
 			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 
-		else if ((OptionPageIndex == 0 || OptionPageIndex == 4) && Event.Key == VK_RETURN) {
+		else if ((OptionPageIndex == 0 || OptionPageIndex == 4 || OptionPageIndex == 5) && Event.Key == VK_RETURN) {
 			switch (OptionPageIndex) {
 			case 0:
 				Exit();  break;
@@ -351,47 +392,6 @@ public:
 		else if (Event.Key == VK_ESCAPE) {
 			Exit();
 			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
-		}
-	}
-
-	// 타이틀 화면 세팅
-	void SetTitleScreen(bool IsIntroPlayed) {
-		// 인트로 플레이 여부
-		// 인트로를 이미 플레이 했다면 인트로 애니메이션을 실행하지 않는다.
-		if (IsIntroPlayed) {
-			IntroPlayState = false;
-
-			// 인트로 애니메이션이 모두 진행된 상태로 초기화 한다.
-			TitleActivateState = true;
-			TitleTextRenderState = true;
-			TitleTextHorizontalOffset = 0.0;
-			TitleImagePosition = SDK::Vector2(SDK::ASP(1.0) - 0.45, -1.0 + 0.2);
-			TitleImageSize = 1.0;
-
-			// 카메라 위치 지정
-			TitleCameraPosition = SDK::Vector2(0.7, 0.4);
-			TitleCameraZoom = 1.5;
-			SDK::CameraControl.Move(0.7, 0.4);
-			SDK::CameraControl.SetZoom(1.5);
-		}
-
-		// 타이틀 모드로 최초 진입했다면 인트로 애니메이션을 플레이 한다
-		else {
-			IntroPlayState = true;
-
-			TitleTextRenderState = false;
-			TitleTextHorizontalOffset = 3.0;
-			TitleImagePosition = SDK::Vector2(0.0, 0.5);
-			TitleImageSize = 1.8;
-
-			// 카메라 위치 지정
-			TitleCameraPosition = SDK::Vector2(-1.3, 0.4);
-			TitleCameraZoom = 2.0;
-			SDK::CameraControl.Move(-1.3, 0.4);
-			SDK::CameraControl.SetZoom(2.0);
-
-			TitleCameraPositionMove.SetMovePoint(TitleCameraPosition, SDK::Vector2(0.7, 0.4));
-			TitleCameraZoomMove.SetMovePoint(TitleCameraZoom, 1.5);
 		}
 	}
 

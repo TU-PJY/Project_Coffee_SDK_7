@@ -56,7 +56,7 @@ constexpr bool ENABLE_DEV_EXIT = false;
 // scene layer option
 // 'EOL' should be typed at last
 enum SDK_LAYER
-{ LAYER1, LAYER2, LAYER3, EOL };
+{ LAYER_BG, LAYER1, LAYER2, LAYER3, LAYER4, LAYER5, LAYER6, LAYER7, EOL };
 
 // Specifies the size of the deletion location buffer
 constexpr int DELETE_LOCATION_BUFFER_SIZE = 500;

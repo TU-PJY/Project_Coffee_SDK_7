@@ -141,6 +141,8 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cart.cpp" />
+    <ClCompile Include="Cover.cpp" />
     <ClCompile Include="SDK_ModeAttribute.cpp" />
     <ClCompile Include="Src\SDK_AnimationTool.cpp" />
     <ClCompile Include="Src\SDK_CameraController.cpp" />
@@ -182,8 +184,25 @@
     <ClCompile Include="Src\SDK_Timer.cpp" />
     <ClCompile Include="Src\SDK_Transform.cpp" />
     <ClCompile Include="Src\SDK_UITool.cpp" />
+    <ClCompile Include="Xion.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackgroundShelf.h" />
+    <ClInclude Include="Cart.h" />
+    <ClInclude Include="CountDown.h" />
+    <ClInclude Include="Cover.h" />
+    <ClInclude Include="DestroyedCan.h" />
+    <ClInclude Include="ED.h" />
+    <ClInclude Include="Explode.h" />
+    <ClInclude Include="Floor.h" />
+    <ClInclude Include="People.h" />
+    <ClInclude Include="Pillar.h" />
+    <ClInclude Include="PlayMode.h" />
+    <ClInclude Include="PlayModeManager.h" />
+    <ClInclude Include="Score.h" />
+    <ClInclude Include="Shelf.h" />
+    <ClInclude Include="Smoke.h" />
+    <ClInclude Include="TimeWatch.h" />
     <ClInclude Include="TitleMode.h" />
     <ClInclude Include="Src\SDK_AnimationTool.h" />
     <ClInclude Include="Src\SDK_CameraController.h" />
@@ -233,6 +252,7 @@
     <ClInclude Include="Src\SDK_UtilPack.h" />
     <ClInclude Include="Src\SDK_ModeResource.h" />
     <ClInclude Include="TitleScreen.h" />
+    <ClInclude Include="Xion.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ModeTemplate.txt" />

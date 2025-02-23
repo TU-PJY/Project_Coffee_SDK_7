@@ -59,6 +59,38 @@ namespace SDK {
 		// Obtains an BoundingCircle object from a specific object class.
 		virtual SDK::BoundingCircle GetBoundingCircle() { return {}; }
 
+		// timewatch functions
+		virtual void Stop() {}
+		virtual void PlayBGM() {}
+		virtual void StopBGM() {}
+		virtual void Start() {}
+		virtual void AddTime() {}
+		virtual void DeleteTime() {}
+
+		// people functions
+		virtual void HitPeople() {}
+		virtual void EnableBack() {}
+
+		// xion functions
+		virtual void PushPeople() {}
+
+		// score funxtions
+		virtual void AddScore(int Score) {}
+
+		// shelf functions
+		virtual void EnableCoffeeHit() {}
+		virtual ItemStruct GetFrontCoffee() { return{}; }
+		virtual ItemStruct GetNextCoffee() { return{}; }
+		virtual void BreakCoffee() {}
+
+		// ed functions
+		virtual void TellNextPosition(float PositionValue) {}
+		virtual float GetPosition() { return{}; }
+		virtual void EnableInput() {}
+
+		// cover functions
+		virtual bool GetState() { return{}; }
+
 	private:
 		glm::vec4 ViewportPosition();
 		glm::vec4 LocalPosition();
