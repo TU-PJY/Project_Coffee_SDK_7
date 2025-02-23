@@ -93,9 +93,7 @@ public:
 		}
 
 		// 시간이 끝나면 게임오버 된다
-		if (Time <= 0.0) {
-			SDK::GLOBAL.GameOver = true;
-
+		if (!SDK::GLOBAL.GameOver && Time <= 0.0) {
 			if (auto Manager = SDK::Scene.Find("play_mode_manager"); Manager)
 				Manager->StopBGM();
 
@@ -104,6 +102,9 @@ public:
 				SDK::GLOBAL.Ending = GameOver_TimeOut;
 			else
 				SDK::GLOBAL.Ending = GameOver_Suppressed;
+
+			SDK::SoundTool.Play(SDK::SOUND.GameOver, SDK::CHANNEL.BGM);
+			SDK::GLOBAL.GameOver = true;
 		}
 		
 		if (SDK::GLOBAL.GameOver)

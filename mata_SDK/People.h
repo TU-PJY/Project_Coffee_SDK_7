@@ -206,6 +206,19 @@ public:
 		if (Position.x > SDK::Camera.Position.x + SDK::ASP(1.0) + 1.2)
 			return;
 
+		if (Frame == Listy * 2)
+			RenderShadow(0.5);
+		else if(Frame == Mayo * 2)
+			RenderShadow(0.3);
+		else if (Frame == Naia * 2)
+			RenderShadow(0.25);
+		else if (Frame == Melloon * 2)
+			RenderShadow(0.4);
+		else if (Frame == Daepyo * 2)
+			RenderShadow(0.05);
+		else
+			RenderShadow(0.2);
+
 		// »ç¶÷ ·»´õ¸µ
 		Begin();
 		if(Frame == Listy * 2)
@@ -233,6 +246,12 @@ public:
 			SDK::Transform.Scale(SDK::MoveMatrix, 1.5, 1.5);
 			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.Cart, 0);
 		}
+	}
+
+	void RenderShadow(float Offset) {
+		Begin();
+		SDK::Transform.Move(SDK::MoveMatrix, Position.x + Offset, Position.y - 0.8);
+		SDK::ImageTool.RenderImage(SDK::IMAGE.Shadow);
 	}
 	
 	void HitPeople() {

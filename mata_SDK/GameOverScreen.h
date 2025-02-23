@@ -346,6 +346,14 @@ public:
 
 		// ½Ã¿Â ·»´õ¸µ
 		Begin();
+		if (SDK::GLOBAL.Ending == GameOver_Suppressed || SDK::GLOBAL.Ending == GameOver_HitXion)
+			SDK::Transform.Move(SDK::MoveMatrix, SDK::ASP(-1.0) + 0.5, -0.9);
+		else
+			SDK::Transform.Move(SDK::MoveMatrix, SDK::ASP(-1.0) + 0.5 - 0.075, -0.9);
+		SDK::Transform.Scale(SDK::MoveMatrix, 0.75, 0.75);
+		SDK::ImageTool.RenderImage(SDK::IMAGE.Shadow);
+
+		Begin();
 		SDK::Transform.Move(SDK::MoveMatrix, SDK::ASP(-1.0) + 0.5 + ShiverValue.x, -0.3 + ShiverValue.y + XionVerticalSize * 0.5);
 		SDK::Transform.Scale(SDK::MoveMatrix, 1.5, 1.5 + XionVerticalSize);
 

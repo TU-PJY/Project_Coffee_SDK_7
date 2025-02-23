@@ -17,6 +17,7 @@ namespace SDK {
 		Image	    XionBack{};
 		SpriteSheet ED_GameOver{};
 		SpriteSheet Chloe{};
+		Image Shadow{};
 
 		SpriteSheet Coffee{};
 		SpriteSheet CoffeeBack{};

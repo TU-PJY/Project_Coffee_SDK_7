@@ -19,5 +19,5 @@ void ModeAttribute() {
 	Pause.Map(SDK::MODE.Pause);
 
 	// Set start mode
-	SDK::START_MODE = SDK::MODE.Title;
+	SDK::START_MODE = SDK::MODE.Play;
 }

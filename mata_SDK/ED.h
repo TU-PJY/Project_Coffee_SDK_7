@@ -307,7 +307,6 @@ public:
 		else {
 			// 입력 가능 상태 비활성화
 			InputAvailable = false;
-			SDK::SoundTool.PlayOnce(SDK::SOUND.GameOver, BgmChannel, SoundPlayed);
 
 			// 이드에 포커싱 한다.
 			SDK::Math.Lerp(EDCameraPosition, Position, 5.0, FrameTime);
@@ -347,6 +346,11 @@ public:
 	void RenderFunc() {
 		SDK::Vector2 FinalPosition{ Position + AnimationSize * 0.5 + TiltValue * 0.5 + ShakeValue.x , BreatheSize * 0.5 - AnimationSize * 0.25 + ShakeValue.y };
 		SDK::Vector2 FinalSize{ 2.0 + AnimationSize, 2.0 + BreatheSize - AnimationSize * 0.5 };
+
+		Begin();
+		SDK::Transform.Move(SDK::MoveMatrix, Position - 0.1 + AnimationSize * 0.5, -0.8);
+		SDK::Transform.Scale(SDK::MoveMatrix, 1.0 + AnimationSize, 1.0);
+		SDK::ImageTool.RenderImage(SDK::IMAGE.Shadow);
 
 		Begin();
 		SDK::Transform.Move(SDK::MoveMatrix, FinalPosition);

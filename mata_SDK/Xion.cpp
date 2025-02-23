@@ -59,8 +59,11 @@ void Xion::UpdateFunc(float FrameTime) {
 			// 1초 후 게임오버 된다
 			else {
 				GameOverTimer.Update(FrameTime);
-				if (GameOverTimer.Sec() >= 1) 
+				if (GameOverTimer.Sec() >= 1) {
+					if(!SDK::GLOBAL.GameOver)
+						SDK::SoundTool.Play(SDK::SOUND.GameOver, SDK::CHANNEL.BGM);
 					SDK::GLOBAL.GameOver = true;
+				}
 			}
 		}
 	}
@@ -85,6 +88,15 @@ void Xion::UpdateFunc(float FrameTime) {
 void Xion::RenderFunc() {
 	if (Position.x > SDK::Camera.Position.x + SDK::ASP(1.0) + 1.0)
 		return;
+
+	Begin();
+	if(Frame == Xion_Cry1)
+		SDK::Transform.Move(SDK::MoveMatrix, Position.x - 0.2, Position.y - 0.8);
+	else
+		SDK::Transform.Move(SDK::MoveMatrix, Position.x, Position.y - 0.8);
+	SDK::Transform.RotateH(SDK::MoveMatrix, HRotation);
+	SDK::Transform.Move(SDK::MoveMatrix, 0.1, 0.0);
+	SDK::ImageTool.RenderImage(SDK::IMAGE.Shadow);
 
 	Begin();
 	SDK::Transform.Move(SDK::MoveMatrix, Position.x + TiltValue * 0.5 + ShakeValue.x, Position.y + VerticalSize * 0.5 + ShakeValue.y);
