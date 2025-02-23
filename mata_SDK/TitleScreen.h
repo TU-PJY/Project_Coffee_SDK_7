@@ -84,7 +84,7 @@ private:
 
 	// 메뉴 페이지, 페이지 번호에 따라 표시되는 항목이 달라진다
 	int MenuPage{ 1 };
-
+	 
 	// 텍스트 배경
 	SDK::RectBrush TitleRect{};
 
@@ -165,6 +165,8 @@ public:
 				SDK::EXTool.ClampValue(ExitPageIndex, 0, 1, CLAMP_RETURN);
 				ExitPageFocused[ExitPageIndex] = true;
 			}
+
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 
 		else if (Event.Key == VK_RETURN) {
@@ -181,6 +183,8 @@ public:
 				
 				break;
 			}
+
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 
 		else if (Event.Key == VK_ESCAPE) {
@@ -193,6 +197,8 @@ public:
 				Exit();
 				break;
 			}
+
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 	}
 	
@@ -211,6 +217,8 @@ public:
 			ExitPageIndex += (int)Event.Key - (int)VK_RIGHT;
 			SDK::EXTool.ClampValue(ExitPageIndex, 0, 1, CLAMP_RETURN);
 			ExitPageFocused[ExitPageIndex] = true;
+
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 
 		else if (Event.Key == VK_RETURN) {
@@ -218,10 +226,14 @@ public:
 				SDK::System.Exit();
 			else if (ExitPageFocused[1]) 
 				Exit();
+
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 
-		else if (Event.Key == VK_ESCAPE) 
+		else if (Event.Key == VK_ESCAPE) {
 			Exit();
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
+		}
 	}
 
 	// 메인 페이지 메뉴 입력
@@ -232,6 +244,8 @@ public:
 			MainPageIndex += (int)Event.Key - (int)VK_RIGHT;
 			SDK::EXTool.ClampValue(MainPageIndex, 0, 2, CLAMP_RETURN);
 			MainPageFocused[MainPageIndex] = true;
+
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 
 		else if (Event.Key == VK_RETURN) {
@@ -240,10 +254,14 @@ public:
 			case 1: MenuPage = OptionPage;  break;
 			case 2: MenuPage = ExitPage;  break;
 			}
+
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 
-		else if (Event.Key == VK_ESCAPE)
+		else if (Event.Key == VK_ESCAPE) {
 			MenuPage = ExitPage;
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
+		}
 	}
 
 	// 옵션 페이지 메뉴 입력
@@ -260,22 +278,48 @@ public:
 			OptionPageIndex += (int)Event.Key - (int)VK_RIGHT;
 			SDK::EXTool.ClampValue(OptionPageIndex, 0, 5, CLAMP_RETURN);
 			OptionPageFocused[OptionPageIndex] = true;
+
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 
-		else if (Event.Key == VK_RETURN) {
+		if (0 < OptionPageIndex && OptionPageIndex < 4 && (Event.Key == VK_RIGHT || Event.Key == VK_LEFT)) {
 			switch (OptionPageIndex) {
-			case 0:
-				Exit();
+			case 1:
+				SDK::EXTool.SwitchBool(SDK::GLOBAL.FullscreenAcvivated);
+				SDK::FILE.UserSettingData.UpdateDigitData("Setting", "Fullscreen", (int)SDK::GLOBAL.FullscreenAcvivated);
 				break;
-
-			case 4:
-				MenuPage = ResetPage;
+			case 2:
+				SDK::GLOBAL.BGMVolume += (float)((int)Event.Key - (int)VK_UP) * 0.1;
+				SDK::EXTool.ClampValue(SDK::GLOBAL.BGMVolume, 0.0, 1.0, CLAMP_FIXED);
+				SDK::SoundTool.SetVolume(SDK::CHANNEL.BGM, SDK::GLOBAL.BGMVolume);
+				SDK::FILE.UserSettingData.UpdateDigitData("Setting", "BGMVolume", SDK::GLOBAL.BGMVolume);
+				break;
+			case 3:
+				SDK::GLOBAL.SFXVolume += (float)((int)Event.Key - (int)VK_UP) * 0.1;
+				SDK::EXTool.ClampValue(SDK::GLOBAL.SFXVolume, 0.0, 1.0, CLAMP_FIXED);
+				SDK::SoundTool.SetVolume(SDK::CHANNEL.SFX, SDK::GLOBAL.SFXVolume);
+				SDK::FILE.UserSettingData.UpdateDigitData("Setting", "SFXVolume", SDK::GLOBAL.SFXVolume);
 				break;
 			}
+
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 
-		else if (Event.Key == VK_ESCAPE) 
+		else if ((OptionPageIndex == 0 || OptionPageIndex == 4) && Event.Key == VK_RETURN) {
+			switch (OptionPageIndex) {
+			case 0:
+				Exit();  break;
+			case 4:
+				MenuPage = ResetPage;  break;
+			}
+
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
+		}
+
+		else if (Event.Key == VK_ESCAPE) {
 			Exit();
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
+		}
 	}
 
 	// 리셋 페이지 메뉴 입력
@@ -292,16 +336,22 @@ public:
 			ResetPageIndex += (int)Event.Key - (int)VK_RIGHT;
 			SDK::EXTool.ClampValue(ResetPageIndex, 0, 1, CLAMP_RETURN);
 			ResetPageFocused[ResetPageIndex] = true;
+
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 
 		else if (Event.Key == VK_RETURN) {
 			if (ResetPageIndex == 1) 
 				SDK::FILE.HighscoreData.ResetData();
 			Exit();
+
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 
-		else if (Event.Key == VK_ESCAPE) 
+		else if (Event.Key == VK_ESCAPE) {
 			Exit();
+			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
+		}
 	}
 
 	// 타이틀 화면 세팅
@@ -370,7 +420,7 @@ public:
 		}
 	}
 
-	// ui 업데이드
+	// ui 업데이트
 	void UpdateUI(float FrameTime) {
 		if (TitleTextRenderState)
 			SDK::Math.Lerp(TitleTextHorizontalOffset, 0.0, 5.0, FrameTime);
