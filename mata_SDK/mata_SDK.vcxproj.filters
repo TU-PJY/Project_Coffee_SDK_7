@@ -178,6 +178,9 @@
     <Filter Include="[2]___________[ Object ]\[ Misc ]">
       <UniqueIdentifier>{0d217472-ce87-4811-a58d-1fe6e793b177}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[2]___________[ Object ]\[ Gameover Mode ]">
+      <UniqueIdentifier>{8b06ac9d-a685-4402-8ebd-ed4f817f0431}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Library\tinyxml\tinystr.cpp">
@@ -511,6 +514,12 @@
     </ClInclude>
     <ClInclude Include="Floor.h">
       <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScreen.h">
+      <Filter>[2]___________[ Object ]\[ Gameover Mode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverMode.h">
+      <Filter>[1]___________[ GameMode ]\[1]_[ Modes ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

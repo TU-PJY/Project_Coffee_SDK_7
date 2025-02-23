@@ -88,6 +88,10 @@ private:
 	// 텍스트 배경
 	SDK::RectBrush TitleRect{};
 
+
+	// 게임 시작 타이머
+	SDK::Timer StartTimer{};
+
 public:
 	TitleScreen(bool IsIntroPlayed) {
 		// 텍스트 초기화
@@ -130,22 +134,34 @@ public:
 	}
 
 	void UpdateFunc(float FrameTime) {
-		// 인트로 업데이트
-		UpdateIntroAnimation(FrameTime);
+		if (!GameStartState) {
+			// 인트로 업데이트
+			UpdateIntroAnimation(FrameTime);
 
-		// UI 업데이트
-		UpdateUI(FrameTime);
+			// UI 업데이트
+			UpdateUI(FrameTime);
 
-		// 카메라 업데이트
-		UpdateTitleCamera(FrameTime);
+			// 카메라 업데이트
+			UpdateTitleCamera(FrameTime);
 
-		// 시온 이드 애니메이션 업데이트
-		UpdateXionEDAnimation(FrameTime);
+			// 시온 이드 애니메이션 업데이트
+			UpdateXionEDAnimation(FrameTime);
+		}
+
+		// 게임 시작 시 1초 후 플레이 모드로 전환한다
+		else {
+			if (StartTimer.UpdateAndCheckSec(1, CHECK_AND_STOP, FrameTime)) 
+				SDK::Scene.SwitchMode(SDK::MODE.Play);
+		}
 	}
 
 	void RenderFunc() {
-		RenderObjects();
-		RenderUI();
+		if (!GameStartState) {
+			RenderObjects();
+			RenderUI();
+		}
+		else
+			TitleRect.Draw(0.0, 0.0, SDK::ASP(2.0), 2.0);
 	}
 
 	// 타이틀 화면 세팅
@@ -291,12 +307,21 @@ public:
 
 		else if (Event.Key == VK_RETURN) {
 			switch (MainPageIndex) {
-			case 0: break;
+				// 컨트롤러를 해제하고 게임 시작 상태를 활성화 한다
+			case 0: 
+				GameStartState = true; 
+				SDK::Scene.DeleteInputObject(this);
+				break;
 			case 1: MenuPage = OptionPage;  break;
 			case 2: MenuPage = ExitPage;  break;
 			}
 
-			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
+			if(MainPageIndex != 0)
+				SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
+			else {
+				SDK::SoundTool.Play(SDK::SOUND.CartCrash, SDK::CHANNEL.SFX);
+				SDK::SoundTool.Stop(SDK::CHANNEL.BGM);
+			}
 		}
 
 		else if (Event.Key == VK_ESCAPE) {

@@ -195,6 +195,8 @@
     <ClInclude Include="ED.h" />
     <ClInclude Include="Explode.h" />
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="GameOverMode.h" />
+    <ClInclude Include="GameOverScreen.h" />
     <ClInclude Include="People.h" />
     <ClInclude Include="Pillar.h" />
     <ClInclude Include="PlayMode.h" />
