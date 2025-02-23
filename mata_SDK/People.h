@@ -271,7 +271,6 @@ public:
 	}
 
 	void EnableBack() {
-		std::cout << "Enabled" << std::endl;
 		ShowBack = true;
 	}
 

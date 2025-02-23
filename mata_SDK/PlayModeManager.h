@@ -15,7 +15,7 @@ private:
 public:
 	// 일시정지 모드로 전환
 	void InputKey(SDK::KeyEvent& Event) {
-		if (GameStart && Event.Type == WM_KEYDOWN && Event.Key == VK_ESCAPE)
+		if (Event.Type == WM_KEYDOWN && Event.Key == VK_ESCAPE)
 			SDK::Scene.StartFloatingMode(SDK::MODE.Pause, true);
 	}
 

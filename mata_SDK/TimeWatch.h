@@ -48,6 +48,9 @@ public:
 	}
 
 	void RenderFunc() {
+		if (SDK::Scene.Mode() != SDK::MODE.Play)
+			return;
+
 		Text.Rotate(Rotation);
 		Text.Render(SDK::ASP(1.0) - 0.6, 0.3, Size, L"+10");
 	}

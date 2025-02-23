@@ -161,7 +161,6 @@ void SDK::SDK_Scene::EndFloatingMode() {
 	RemoveWindowSubclass(SDK::SystemHWND, CurrentController, 1);
 	SetWindowSubclass(SDK::SystemHWND, ControllerBuffer, 1, 0);
 	CurrentController = ControllerBuffer;
-	ControllerBuffer = nullptr;
 
 	FloatingActivateCommand = false;
 	FloatingFocusCommand = false;

@@ -90,6 +90,7 @@ namespace SDK {
 		virtual void TellNextPosition(float PositionValue) {}
 		virtual float GetPosition() { return{}; }
 		virtual void EnableInput() {}
+		virtual void DisableInput() {}
 
 		// cover functions
 		virtual bool GetState() { return{}; }

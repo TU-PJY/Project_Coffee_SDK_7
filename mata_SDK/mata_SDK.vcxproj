@@ -197,6 +197,8 @@
     <ClInclude Include="Floor.h" />
     <ClInclude Include="GameOverMode.h" />
     <ClInclude Include="GameOverScreen.h" />
+    <ClInclude Include="PauseMode.h" />
+    <ClInclude Include="PauseScreen.h" />
     <ClInclude Include="People.h" />
     <ClInclude Include="Pillar.h" />
     <ClInclude Include="PlayMode.h" />

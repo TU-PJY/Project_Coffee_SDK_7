@@ -181,6 +181,9 @@
     <Filter Include="[2]___________[ Object ]\[ Gameover Mode ]">
       <UniqueIdentifier>{8b06ac9d-a685-4402-8ebd-ed4f817f0431}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[2]___________[ Object ]\[ Pause Mode ]">
+      <UniqueIdentifier>{e69a0a87-db8a-471a-9612-af973c9451d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Library\tinyxml\tinystr.cpp">
@@ -519,6 +522,12 @@
       <Filter>[2]___________[ Object ]\[ Gameover Mode ]</Filter>
     </ClInclude>
     <ClInclude Include="GameOverMode.h">
+      <Filter>[1]___________[ GameMode ]\[1]_[ Modes ]</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseScreen.h">
+      <Filter>[2]___________[ Object ]\[ Pause Mode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMode.h">
       <Filter>[1]___________[ GameMode ]\[1]_[ Modes ]</Filter>
     </ClInclude>
   </ItemGroup>
