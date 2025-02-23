@@ -129,6 +129,25 @@ public:
 		}
 	}
 
+	void UpdateFunc(float FrameTime) {
+		// 인트로 업데이트
+		UpdateIntroAnimation(FrameTime);
+
+		// UI 업데이트
+		UpdateUI(FrameTime);
+
+		// 카메라 업데이트
+		UpdateTitleCamera(FrameTime);
+
+		// 시온 이드 애니메이션 업데이트
+		UpdateXionEDAnimation(FrameTime);
+	}
+
+	void RenderFunc() {
+		RenderObjects();
+		RenderUI();
+	}
+
 	// 타이틀 활성화 전 메뉴 입력
 	void InputFrontPage(SDK::KeyEvent& Event) {
 		auto Exit = [&]() {
@@ -285,25 +304,6 @@ public:
 			Exit();
 	}
 
-	void UpdateFunc(float FrameTime) {
-		// 인트로 업데이트
-		UpdateIntroAnimation(FrameTime);
-
-		// UI 업데이트
-		UpdateUI(FrameTime);
-
-		// 카메라 업데이트
-		UpdateTitleCamera(FrameTime);
-
-		// 시온 이드 애니메이션 업데이트
-		UpdateXionEDAnimation(FrameTime);
-	}
-
-	void RenderFunc() {
-		RenderObjects();
-		RenderUI();
-	}
-
 	// 타이틀 화면 세팅
 	void SetTitleScreen(bool IsIntroPlayed) {
 		// 인트로 플레이 여부
@@ -378,6 +378,26 @@ public:
 
 	// 카메라 업데이트
 	void UpdateTitleCamera(float FrameTime) {
+		// 메뉴 페이지에 따라 카메라를 움직인다
+		if (TitleActivateState) {
+			switch (MenuPage) {
+			case MainPage:
+				SDK::Math.Lerp(EffectCameraPosition, SDK::Vector2(0.0, 0.0), 2.0, FrameTime);
+				SDK::Math.Lerp(EffectCameraZoom, 0.0, 2.0, FrameTime);
+				break;
+
+			case ExitPage:
+				SDK::Math.Lerp(EffectCameraPosition, SDK::Vector2(0.3, -0.25), 2.0, FrameTime);
+				SDK::Math.Lerp(EffectCameraZoom, 3.0, 2.0, FrameTime);
+				break;
+
+			case OptionPage: case ResetPage:
+				SDK::Math.Lerp(EffectCameraPosition, SDK::Vector2(-2.0, 0.0), 2.0, FrameTime);
+				SDK::Math.Lerp(EffectCameraZoom, 0.0, 2.0, FrameTime);
+				break;
+			}
+		}
+
 		SDK::CameraControl.Move(TitleCameraPosition + EffectCameraPosition);
 		SDK::CameraControl.SetZoom(TitleCameraZoom + EffectCameraZoom);
 	}

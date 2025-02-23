@@ -12,7 +12,7 @@ public:
 	static void Start() {
 		SetUp();
 		SDK::System.SetBackColorRGB(122, 138, 154);
-		SDK::Scene.AddObject(new TitleScreen(true), "title_screen", LAYER1, true);
+		SDK::Scene.AddObject(new TitleScreen(false), "title_screen", LAYER1, true);
 	}
 
 	static void Destructor() {
