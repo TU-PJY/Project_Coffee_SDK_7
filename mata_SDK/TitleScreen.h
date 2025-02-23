@@ -65,11 +65,16 @@ private:
 		L"아니오"
 	};
 
+	std::wstring QuestionItem2[2] = {
+		L"아니오",
+		L"예"
+	};
+
 	// 메뉴 텍스트 포커싱 
 	bool ExitPageFocused[2]{ true, false };
 	bool MainPageFocused[3]{ true, false, false };
 	bool OptionPageFocused[6]{ true, false, false, false, false, false };
-	bool ResetPageFocused[2]{ false, true };
+	bool ResetPageFocused[2]{ true, false };
 
 	// 현재 가리키는 메뉴 항목
 	int ExitPageIndex{};
@@ -110,25 +115,35 @@ public:
 		if (!TitleActivateState)
 			InputFrontPage(Event);
 
-		else {
+		else if (TitleActivateState && TitleTextRenderState) {
 			switch (MenuPage) {
-			case MainPage: // 메인 페이지 메뉴 입력
-				InputMainPage(Event);  break;
-			case ExitPage: // 나가기 페이지 메뉴 입력
-				InputExitPage(Event);  break;
+				case ExitPage: // 나가기 페이지 메뉴 입력
+					InputExitPage(Event);  break;
+				case MainPage: // 메인 페이지 메뉴 입력
+					InputMainPage(Event);  break;
+				case OptionPage:// 옵션 페이지 메뉴 입력
+					InputOptionPage(Event);  break;
+				case ResetPage: // 리셋 페이지 메뉴 입력
+					InputResetPage(Event);  break;
 			}
 		}
 	}
 
 	// 타이틀 활성화 전 메뉴 입력
 	void InputFrontPage(SDK::KeyEvent& Event) {
+		auto Exit = [&]() {
+			MenuPage = MainPage;
+			ExitPageFocused[ExitPageIndex] = false;
+			ExitPageFocused[0] = true;
+			ExitPageIndex = 0;
+			};
+
 		if (Event.Key == VK_UP || Event.Key == VK_DOWN) {
 			if (MenuPage == ExitPage) {
 				// 방향키 위를 누르면 감소, 아래를 누르면 증가
+				ExitPageFocused[ExitPageIndex] = false;
 				ExitPageIndex += (int)Event.Key - (int)VK_RIGHT;
 				SDK::EXTool.ClampValue(ExitPageIndex, 0, 1, CLAMP_RETURN);
-				for (int i = 0; i < 2; i++)  
-					ExitPageFocused[i] = false;
 				ExitPageFocused[ExitPageIndex] = true;
 			}
 		}
@@ -142,13 +157,9 @@ public:
 			case ExitPage:
 				if (ExitPageFocused[0])
 					SDK::System.Exit();
-				else if (ExitPageFocused[1]) {
-					MenuPage = MainPage;
-					for (int i = 0; i < 2; i++)  
-						ExitPageFocused[i] = false;
-					ExitPageFocused[0] = true;
-					ExitPageIndex = 0;
-				}
+				else if (ExitPageFocused[1]) 
+					Exit();
+				
 				break;
 			}
 		}
@@ -160,61 +171,118 @@ public:
 				break;
 
 			case ExitPage:
-				MenuPage = MainPage;
-				for (int i = 0; i < 2; i++) 
-					ExitPageFocused[i] = false;
-				ExitPageFocused[0] = true;
-				ExitPageIndex = 0;
+				Exit();
 				break;
 			}
 		}
 	}
-
-	// 메인 페이지 메뉴 입력
-	void InputMainPage(SDK::KeyEvent& Event) {
-		if (Event.Key == VK_UP || Event.Key == VK_DOWN) {
-			// 방향키 위를 누르면 감소, 아래를 누르면 증가
-			MainPageIndex += (int)Event.Key - (int)VK_RIGHT;
-			SDK::EXTool.ClampValue(MainPageIndex, 0, 2, CLAMP_RETURN);
-			for (int i = 0; i < 3; i++) 
-				MainPageFocused[i] = false;
-			MainPageFocused[MainPageIndex] = true;
-		}
-
-		else if (Event.Key == VK_ESCAPE)
-			MenuPage = ExitPage;
-	}
-
+	
 	// 나가기 페이지 메뉴 입력
 	void InputExitPage(SDK::KeyEvent& Event) {
+		auto Exit = [&]() {
+			MenuPage = MainPage;
+			ExitPageFocused[ExitPageIndex] = false;
+			ExitPageFocused[0] = true;
+			ExitPageIndex = 0;
+			};
+
 		if (Event.Key == VK_UP || Event.Key == VK_DOWN) {
 			// 방향키 위를 누르면 감소, 아래를 누르면 증가
+			ExitPageFocused[ExitPageIndex] = false;
 			ExitPageIndex += (int)Event.Key - (int)VK_RIGHT;
 			SDK::EXTool.ClampValue(ExitPageIndex, 0, 1, CLAMP_RETURN);
-			for (int i = 0; i < 2; i++)  
-				ExitPageFocused[i] = false;
 			ExitPageFocused[ExitPageIndex] = true;
 		}
 
 		else if (Event.Key == VK_RETURN) {
 			if (ExitPageFocused[0])
 				SDK::System.Exit();
-			else if (ExitPageFocused[1]) {
-				MenuPage = MainPage;
-				for (int i = 0; i < 2; i++)
-					ExitPageFocused[i] = false;
-				ExitPageFocused[0] = true;
-				ExitPageIndex = 0;
+			else if (ExitPageFocused[1]) 
+				Exit();
+		}
+
+		else if (Event.Key == VK_ESCAPE) 
+			Exit();
+	}
+
+	// 메인 페이지 메뉴 입력
+	void InputMainPage(SDK::KeyEvent& Event) {
+		if (Event.Key == VK_UP || Event.Key == VK_DOWN) {
+			// 방향키 위를 누르면 감소, 아래를 누르면 증가
+			MainPageFocused[MainPageIndex] = false;
+			MainPageIndex += (int)Event.Key - (int)VK_RIGHT;
+			SDK::EXTool.ClampValue(MainPageIndex, 0, 2, CLAMP_RETURN);
+			MainPageFocused[MainPageIndex] = true;
+		}
+
+		else if (Event.Key == VK_RETURN) {
+			switch (MainPageIndex) {
+			case 0: break;
+			case 1: MenuPage = OptionPage;  break;
+			case 2: MenuPage = ExitPage;  break;
 			}
 		}
 
-		else if (Event.Key == VK_ESCAPE) {
-			for (int i = 0; i < 2; i++)  
-				ExitPageFocused[i] = false;
-			ExitPageFocused[0] = true;
-			ExitPageIndex = 0;
+		else if (Event.Key == VK_ESCAPE)
+			MenuPage = ExitPage;
+	}
+
+	// 옵션 페이지 메뉴 입력
+	void InputOptionPage(SDK::KeyEvent& Event) {
+		auto Exit = [&]() {
 			MenuPage = MainPage;
+			OptionPageFocused[OptionPageIndex] = false;
+			OptionPageFocused[0] = true;
+			OptionPageIndex = 0;
+			};
+
+		if (Event.Key == VK_UP || Event.Key == VK_DOWN) {
+			OptionPageFocused[OptionPageIndex] = false;
+			OptionPageIndex += (int)Event.Key - (int)VK_RIGHT;
+			SDK::EXTool.ClampValue(OptionPageIndex, 0, 5, CLAMP_RETURN);
+			OptionPageFocused[OptionPageIndex] = true;
 		}
+
+		else if (Event.Key == VK_RETURN) {
+			switch (OptionPageIndex) {
+			case 0:
+				Exit();
+				break;
+
+			case 4:
+				MenuPage = ResetPage;
+				break;
+			}
+		}
+
+		else if (Event.Key == VK_ESCAPE) 
+			Exit();
+	}
+
+	// 리셋 페이지 메뉴 입력
+	void InputResetPage(SDK::KeyEvent& Event) {
+		auto Exit = [&]() {
+			MenuPage = OptionPage;
+			ResetPageFocused[ResetPageIndex] = false;
+			ResetPageFocused[0] = true;
+			ResetPageIndex = 0;
+			};
+
+		if (Event.Key == VK_UP || Event.Key == VK_DOWN) {
+			ResetPageFocused[ResetPageIndex] = false;
+			ResetPageIndex += (int)Event.Key - (int)VK_RIGHT;
+			SDK::EXTool.ClampValue(ResetPageIndex, 0, 1, CLAMP_RETURN);
+			ResetPageFocused[ResetPageIndex] = true;
+		}
+
+		else if (Event.Key == VK_RETURN) {
+			if (ResetPageIndex == 1) 
+				SDK::FILE.HighscoreData.ResetData();
+			Exit();
+		}
+
+		else if (Event.Key == VK_ESCAPE) 
+			Exit();
 	}
 
 	void UpdateFunc(float FrameTime) {
@@ -244,6 +312,7 @@ public:
 			IntroPlayState = false;
 
 			// 인트로 애니메이션이 모두 진행된 상태로 초기화 한다.
+			TitleActivateState = true;
 			TitleTextRenderState = true;
 			TitleTextHorizontalOffset = 0.0;
 			TitleImagePosition = SDK::Vector2(SDK::ASP(1.0) - 0.45, -1.0 + 0.2);
@@ -365,12 +434,12 @@ public:
 		switch (MenuPage) {
 		case ExitPage: // 나가기 페이지 렌더링
 			RenderExitPage();  break;
-
 		case MainPage: // 메인 페이지 렌더링
 			RenderMainPage();  break;
-
 		case OptionPage: // 옵션 페이지 렌더링
 			RenderOptionPage();  break;
+		case ResetPage: // 리셋 페이지 렌더링
+			RenderResetPage();  break;
 		}
 	}
 
@@ -389,7 +458,7 @@ public:
 		// 메뉴 항목 렌더링
 		for (int i = 0; i < 3; i++) {
 			if (MainPageFocused[i])  TitleText.SetColorRGB(255, 213, 80);
-			else				 TitleText.SetColor(1.0, 1.0, 1.0);
+			else				     TitleText.SetColor(1.0, 1.0, 1.0);
 			TitleText.Render(TextHorizontalPositon, 0.25 - 0.25 * i, 0.1, MenuItem[i].c_str());
 		}
 
@@ -412,7 +481,64 @@ public:
 
 	// 옵션 페이지 렌더링
 	void RenderOptionPage() {
+		TitleRect.Draw(0.0, 0.0, SDK::ASP(2.0), 2.0, 0.0, 0.7);
 
+		TitleText.SetAlign(ALIGN_MIDDLE);
+		TitleText.SetHeightAlign(HEIGHT_ALIGN_MIDDLE);
+		TitleText.SetColor(1.0, 1.0, 1.0);
+		TitleText.Render(0.0, 0.8, 0.15, L"환경설정");
+
+		TitleText.SetAlign(ALIGN_LEFT);
+		for (int i = 0; i < 6; i++) {
+			if (OptionPageFocused[i]) TitleText.SetColorRGB(255, 213, 80);
+			else					  TitleText.SetColor(1.0, 1.0, 1.0);
+
+			switch (i) {
+			case 0:
+				TitleText.Render(SDK::ASP(1.0) - 0.1, 0.625 - i * 0.25, 0.1, L"타이틀로 돌아가기");
+				break;
+			case 1:
+				if (SDK::GLOBAL.FullscreenAcvivated)
+					TitleText.Render(SDK::ASP(1.0) - 0.1, 0.625 - i * 0.25, 0.1, L"화면 모드: 전체화면");
+				else
+					TitleText.Render(SDK::ASP(1.0) - 0.1, 0.625 - i * 0.25, 0.1, L"화면 모드: 창");
+				break;
+			case 2:
+				TitleText.Render(SDK::ASP(1.0) - 0.1, 0.625 - i * 0.25, 0.1, L"배경음악 볼륨: %.1f", SDK::GLOBAL.BGMVolume);
+				break;
+			case 3:
+				TitleText.Render(SDK::ASP(1.0) - 0.1, 0.625 - i * 0.25, 0.1, L"효과음 볼륨: %.1f", SDK::GLOBAL.SFXVolume);
+				break;
+			case 4:
+				TitleText.Render(SDK::ASP(1.0) - 0.1, 0.625 - i * 0.25, 0.1, L"진행 상황 초기화");
+				break;
+			case 5:
+				TitleText.Render(SDK::ASP(1.0) - 0.1, 0.625 - i * 0.25, 0.1, L"크래딧");
+				break;
+			}
+		}
+
+		if (0 < OptionPageIndex && OptionPageIndex < 4) {
+			TitleText.SetHeightAlign(HEIGHT_ALIGN_DEFAULT);
+			TitleText.SetAlign(ALIGN_DEFAULT);
+			TitleText.Render(SDK::ASP(-1.0) + 0.1, -0.9, 0.08, L"좌 우 방향키로 설정");
+		}
+	}
+
+	// 리셋 페이지 렌더링
+	void RenderResetPage() {
+		TitleRect.Draw(0.0, 0.0, SDK::ASP(2.0), 2.0, 0.0, 0.7);
+
+		TitleText.SetColor(1.0, 1.0, 1.0);
+		TitleText.SetAlign(ALIGN_MIDDLE);
+		TitleText.Render(0.0, 0.8, 0.15, L"정말인가요?");
+
+		TitleText.SetAlign(ALIGN_LEFT);
+		for (int i = 0; i < 2; i++) {
+			if (ResetPageFocused[i])  TitleText.SetColorRGB(255, 213, 80);
+			else				      TitleText.SetColor(1.0, 1.0, 1.0);
+			TitleText.Render(SDK::ASP(1.0) - 0.1, 0.125 - i * 0.25, 0.1, QuestionItem2[i].c_str());
+		}
 	}
 
 	// 나가기 페이지 렌더링
