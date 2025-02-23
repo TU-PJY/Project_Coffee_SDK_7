@@ -94,6 +94,9 @@ private:
 	bool NewHighScore{};
 	bool NewHighRep{};
 
+	// 합계 스킵 여부
+	bool RepSkip{};
+
 public:
 	GameOverScreen() {
 		if(SDK::GLOBAL.Ending == GameOver_TimeOut || SDK::GLOBAL.Ending == GameOver_HitXion)
@@ -186,6 +189,12 @@ public:
 					ShowRep = true;
 					ScoreText.DisableShadow();
 				}
+				else if (ShowRep && !ShowTotalRep) {
+					ShowTotalRep = true;
+					RepSkip = true;
+					CurrentSize = VecSize;
+					SDK::SoundTool.Play(SDK::SOUND.RepTotal, SndChannel3);
+				}
 				else if (ShowTotalRep) {
 					ExitState = true;
 					SDK::Scene.AddObject(new Cover(0.5), "cover", LAYER7);
@@ -249,7 +258,9 @@ public:
 
 		// 각 배상액을 순차적으로 보여준다
 		if (ShowRep) {
-			RepTimer.Update(FrameTime);
+			if(!RepSkip)
+				RepTimer.Update(FrameTime);
+
 			if (CurrentSize != VecSize && RepTimer.CheckMiliSec(0.5, 1, CHECK_AND_INTERPOLATE)) {
 				CurrentSize++;
 				SDK::SoundTool.Play(SDK::SOUND.Rep, SndChannel3);
@@ -257,8 +268,8 @@ public:
 			
 			else if (CurrentSize == VecSize && RepTimer.CheckMiliSec(1, 1, CHECK_AND_INTERPOLATE)) {
 				ShowTotalRep = true;
-				SDK::SoundTool.Play(SDK::SOUND.RepTotal, SndChannel3);
-				SDK::SoundTool.SetVolume(SndChannel3, SDK::GLOBAL.SFXVolume);
+				if(!RepSkip)
+					SDK::SoundTool.Play(SDK::SOUND.RepTotal, SndChannel3);
 				RepTimer.Stop();
 				RepTimer.Reset();
 			}
@@ -278,14 +289,19 @@ public:
 		// 화면이 어두워지면서 홈모드로 전환한다
 		// 볼륨을 부드럽게 줄인다
 		if (ExitState) {
+			SDK::SoundTool.FadeOut(SDK::CHANNEL.BGM, 0.5, FrameTime);
 			SDK::SoundTool.FadeOut(SndChannel2, 0.5, FrameTime);
+			SDK::SoundTool.FadeOut(SndChannel3, 0.5, FrameTime);
 
 			if(auto Cover = SDK::Scene.Find("cover"); Cover)
 				if (Cover->GetState()) {
 					SDK::System.SetBackColorRGB(122, 138, 154);
 					DeleteTimer.Update(FrameTime);
-					if (DeleteTimer.Sec() >= 1) 
+					if (DeleteTimer.Sec() >= 1) {
+						SDK::SoundTool.Stop(SDK::CHANNEL.BGM);
+						SDK::SoundTool.SetVolume(SDK::CHANNEL.BGM, SDK::GLOBAL.BGMVolume);
 						SDK::Scene.SwitchMode(SDK::MODE.Title);
+					}
 				}
 		}
 	}
@@ -404,7 +420,9 @@ public:
 
 				if (NewHighRep)
 					ScoreText.Render(TextShake.x, -0.5 + TextShake.y, 0.1, L"역대급!!");
+			}
 
+			if (ShowRep) {
 				ScoreText.SetColor(1.0, 1.0, 1.0);
 				ScoreText.SetAlign(ALIGN_LEFT);
 				ScoreText.SetHeightAlign(HEIGHT_ALIGN_DEFAULT);

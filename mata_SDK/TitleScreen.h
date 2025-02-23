@@ -541,7 +541,7 @@ public:
 	//메인 페이지 렌더링
 	void RenderMainPage() {
 		// 배경
-		TitleRect.Draw(SDK::ASP(1.0) + TitleTextHorizontalOffset, 0.0, 1.8, 2.0, 0.0, 0.3);
+		TitleRect.Draw(SDK::ASP(1.0) + TitleTextHorizontalOffset, 0.0, 1.8, 2.0, 0.0, 0.5);
 
 		// 좌측 정렬, 가운데 높이 정렬로 변경
 		TitleText.SetAlign(ALIGN_LEFT);
