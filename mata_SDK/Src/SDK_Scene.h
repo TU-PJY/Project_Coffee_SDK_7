@@ -95,6 +95,8 @@ namespace SDK {
 		// Switch to a specific mode.
 		void SwitchMode(SDK::MODE_PTR ModeFunction);
 
+		void RestartMode(SDK::MODE_PTR ModeFunction);
+
 		// Start floating mode.Existing objects are not deleted.
 		// When true is specified for FloatingFocus, only floating objects are updated. This state is cleared when floating mode ends.
 		void StartFloatingMode(SDK::MODE_PTR ModeFunction, bool FloatingFocusFlag = false);

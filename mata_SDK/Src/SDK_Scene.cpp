@@ -108,6 +108,22 @@ void SDK::SDK_Scene::SwitchMode(SDK::MODE_PTR ModeFunction) {
 	LoopEscapeCommand = true;
 }
 
+void SDK::SDK_Scene::RestartMode(SDK::MODE_PTR ModeFunction) {
+	ClearAll();
+
+	if (DestructorBuffer)
+		DestructorBuffer();
+
+	ModeFunction();
+
+	if (FloatingActivateCommand) {
+		FloatingActivateCommand = false;
+		FloatingFocusCommand = false;
+	}
+
+	LoopEscapeCommand = true;
+}
+
 void SDK::SDK_Scene::RegisterDestructor(SDK::MODE_PTR DestructorFunction) {
 	DestructorBuffer = DestructorFunction;
 }
@@ -408,7 +424,7 @@ void SDK::SDK_Scene::ClearAll() {
 }
 
 void ErrorScreenController(unsigned char Key, int X, int Y) {
-	if (Key == 27 || Key == 32)
+	if (Key == 13 || Key == 27)
 		SDK::System.Exit();
 }
 

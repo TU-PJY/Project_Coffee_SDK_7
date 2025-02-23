@@ -37,6 +37,7 @@ public:
 					if (Timer2.Sec() >= 1) {
 						// 게임오버 모드로 전환
 						SDK::Scene.SwitchMode(SDK::MODE.GameOver);
+						SDK::Scene.AddObject(new DisappearCover, "dis_cover", LAYER7);
 					}
 				}
 			}

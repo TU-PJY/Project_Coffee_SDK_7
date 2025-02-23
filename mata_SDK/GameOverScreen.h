@@ -328,6 +328,7 @@ public:
 						SDK::SoundTool.Stop(SDK::CHANNEL.BGM);
 						SDK::SoundTool.SetVolume(SDK::CHANNEL.BGM, SDK::GLOBAL.BGMVolume);
 						SDK::Scene.SwitchMode(SDK::MODE.Title);
+						SDK::Scene.AddObject(new DisappearCover, "dis_cover", LAYER7);
 					}
 				}
 		}

@@ -1,10 +1,19 @@
 #pragma once
 #include <SDK_Scene.h>
 
+#include "Cover.h"
+
+enum PausePageEnum {
+	Pause_MainPage,
+	RestartPage,
+	ExitToTitlePage,
+	ExitToDesktopPage
+};
+
 class PauseScreen : public SDK::Object {
 private:
+	float RectOpacity{};
 	SDK::RectBrush Rect{};
-
 	SDK::Text Text{};
 
 	// 현재 가리키는 항목 인덱스
@@ -13,23 +22,20 @@ private:
 	// 묻기 메뉴 항목 인덱스
 	int QuestionIndex{};
 
-	// 묻기 상태
-	bool QuestionState{};
+	// 다시 시작하기 묻기
 
-	// 바탕화면으로 나가기 묻기
-	bool QuestionToDesktop{};
-
-	// 메인화면으로 나가기 묻기
-	bool QuestionToTitle{};
+	// 페이지
+	int MenuPage{};
 
 	// 메뉴 항목
-	std::wstring MenuItems[3] = {
+	std::wstring MenuItems[4] = {
 		L"계속하기",
+		L"다시 시작하기",
 		L"타이틀로 나가기",
 		L"바탕화면으로 나가기"
 	};
 
-	bool MenuFocused[3]{};
+	bool MenuFocused[4]{};
 
 	std::wstring QuestionItems[2] = {
 		L"예",
@@ -40,6 +46,11 @@ private:
 
 	SDK::SoundChannel SndChannel{};
 
+	// 타이틀로 나가는 상태
+	bool ExitState{};
+	// 다시 시작하는 상태
+	bool RestartState{};
+
 public:
 	PauseScreen() {
 		Text.Init(L"픽셀로보로보체", FW_DONTCARE);
@@ -47,8 +58,9 @@ public:
 		Text.SetAlign(ALIGN_MIDDLE);
 		Text.SetHeightAlign(HEIGHT_ALIGN_MIDDLE);
 
+		SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SndChannel);
 		SDK::SoundTool.SetVolume(SndChannel, SDK::GLOBAL.SFXVolume);
-		SDK::SoundTool.SetFreqCutOff(SDK::CHANNEL.BGM, 200);
+		SDK::SoundTool.SetFreqCutOff(SDK::CHANNEL.BGM, 300);
 
 		Rect.SetColor(0.0, 0.0, 0.0);
 		Rect.SetRenderType(RENDER_TYPE_STATIC);
@@ -63,72 +75,77 @@ public:
 
 	void InputKey(SDK::KeyEvent& Event) {
 		if (Event.Type == WM_KEYDOWN) {
+			auto BackToMainPage = [&]() {
+				QuestionIndex = 0;
+				QuestionFocused[0] = true;
+				QuestionFocused[1] = false;
+				MenuPage = Pause_MainPage;
+				};
+
 			if (Event.Key == VK_ESCAPE) {
 				SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SndChannel);
 
-				if (!QuestionState)
+				switch (MenuPage) {
+				case Pause_MainPage:
 					SDK::Scene.EndFloatingMode();
-				else {
-					QuestionState = false;
-					QuestionToDesktop = false;
-					QuestionToTitle = false;
-					QuestionIndex = 0;
-					QuestionFocused[0] = true;
-					QuestionFocused[1] = false;
+					break;
+				case ExitToTitlePage: case ExitToDesktopPage: case RestartPage:
+					BackToMainPage();
+					break;
 				}
 			}
 
 			else if (Event.Key == VK_RETURN) {
 				SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SndChannel);
 
-				if (!QuestionState) {
+				if (MenuPage == Pause_MainPage) {
 					switch (MenuIndex) {
 					case 0:
-						SDK::Scene.EndFloatingMode();
+						SDK::Scene.EndFloatingMode();  break;
+					case 1:
+						MenuPage = RestartPage;  break;
+					case 2:
+						MenuPage = ExitToTitlePage;  break;
+					case 3:
+						MenuPage = ExitToDesktopPage;  break;
+					}
+				}
+
+				else if (MenuPage == RestartPage) {
+					switch (QuestionIndex) {
+					case 0:
+						SDK::SoundTool.Stop(SDK::CHANNEL.BGM);
+						RestartState = true;
+						SDK::Scene.DeleteInputObject(this);
 						break;
 					case 1:
-						QuestionState = true;
-						QuestionToTitle = true;
-						break;
-					case 2:
-						QuestionState = true;
-						QuestionToDesktop = true;
+						BackToMainPage();
 						break;
 					}
 				}
 
-				else {
+				else if (MenuPage == ExitToTitlePage) {
 					switch (QuestionIndex) {
 					case 0:
-						if (QuestionToTitle) {
-							if (auto ED = SDK::Scene.Find("ed"); ED)
-								ED->DisableInput();
-							if (auto TimeWatch = SDK::Scene.Find("time_watch"); TimeWatch)
-								TimeWatch->Stop();
-							if (auto Manager = SDK::Scene.Find("play_mode_manager"); Manager) {
-								Manager->StopBGM();
-								Manager->SetGoToTitle();
-							}
-							if (auto CountDown = SDK::Scene.Find("countdown"); CountDown)
-								SDK::Scene.DeleteObject(CountDown);
-							SDK::Scene.EndFloatingMode();
-						}
-						
-						else if (QuestionToDesktop)
-							SDK::System.Exit();
+						SDK::SoundTool.Stop(SDK::CHANNEL.BGM);
+						ExitState = true;
+						SDK::Scene.DeleteInputObject(this);
 						break;
 
 					case 1:
-						QuestionState = false;
-						QuestionIndex = 0;
-						QuestionFocused[0] = true;
-						QuestionFocused[1] = false;
+						BackToMainPage();
+						break;
+					}
+				}
 
-						if (QuestionToTitle) 
-							QuestionToTitle = false;
+				else if (MenuPage == ExitToDesktopPage) {
+					switch (QuestionIndex) {
+					case 0:
+						SDK::System.Exit();
+						break;
 
-						else if (QuestionToDesktop) 
-							QuestionToDesktop = false;
+					case 1:
+						BackToMainPage();
 						break;
 					}
 				}
@@ -137,10 +154,10 @@ public:
 			else if (Event.Key == VK_UP || Event.Key == VK_DOWN) {
 				SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SndChannel);
 
-				if (!QuestionState) {
+				if (MenuPage == Pause_MainPage) {
 					MenuFocused[MenuIndex] = false;
 					MenuIndex += (int)Event.Key - (int)VK_RIGHT;
-					SDK::EXTool.ClampValue(MenuIndex, 0, 2, CLAMP_RETURN);
+					SDK::EXTool.ClampValue(MenuIndex, 0, 3, CLAMP_RETURN);
 					MenuFocused[MenuIndex] = true;
 				}
 				else {
@@ -153,17 +170,34 @@ public:
 		}
 	}
 
+	// 다시 시작이나 타이틀로 나가기 선택 시 화면이 어두워진 후 플레이 모드를 재시작하거나 타이틀 모드로 전환한다
+	void UpdateFunc(float FrameTime) {
+		if (ExitState || RestartState) {
+			RectOpacity += FrameTime * 4.0;
+			if (SDK::EXTool.CheckClampValue(RectOpacity, 1.0, CLAMP_GREATER)) {
+				if (ExitState) {
+					SDK::Scene.SwitchMode(SDK::MODE.Title);
+					SDK::Scene.AddObject(new DisappearCover, "dis_cover", LAYER7);
+				}
+				else if (RestartState) {
+					SDK::Scene.RestartMode(SDK::MODE.Play);
+					SDK::Scene.AddObject(new DisappearCover, "dis_cover", LAYER7);
+				}
+			}
+		}
+	}
+
 	void RenderFunc() {
 		// 뒷배경 
 		Rect.Draw(0.0, 0.0, SDK::ASP(2.0), 2.0, 0.0, 0.7);
 
 		// 텍스트 출력
-		if (!QuestionState) {
+		if (MenuPage == Pause_MainPage) {
 			Text.SetColor(1.0, 1.0, 1.0);
 			Text.Render(0.0, 0.8, 0.15, L"일시정지");
 
-			GLfloat RenderHeight = 0.25;
-			for (int i = 0; i < 3; i++) {
+			float RenderHeight = 0.375;
+			for (int i = 0; i < 4; i++) {
 				// 선택된 항목은 노란색으로 표시된다
 				if (MenuFocused[i])
 					Text.SetColorRGB(255, 213, 80);
@@ -177,12 +211,14 @@ public:
 
 		else {
 			Text.SetColor(1.0, 1.0, 1.0);
-			if (QuestionToTitle) 
+			if(MenuPage == RestartPage)
+				Text.Render(0.0, 0.8, 0.15, L"다시 시작할까요?");
+			else if (MenuPage == ExitToTitlePage) 
 				Text.Render(0.0, 0.8, 0.15, L"타이틀로 나갈까요?");
-			else if(QuestionToDesktop)
-				Text.Render(0.0, 0.8, 0.15, L" 바탕화면으로 나갈까요?");
+			else if(MenuPage == ExitToDesktopPage)
+				Text.Render(0.0, 0.8, 0.15, L"바탕화면으로 나갈까요?");
 
-			GLfloat RenderHeight = 0.125;
+			float RenderHeight = 0.125;
 			for (int i = 0; i < 2; i++) {
 				if(QuestionFocused[i])
 					Text.SetColorRGB(255, 213, 80);
@@ -193,5 +229,8 @@ public:
 				RenderHeight -= 0.25;
 			}
 		}
+
+		if (ExitState || RestartState)
+			Rect.Draw(0.0, 0.0, SDK::ASP(2.0), 2.0, 0.0, RectOpacity);
 	}
 };
