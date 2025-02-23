@@ -28,8 +28,8 @@ private:
 	float VerticalSize{};
 
 	// 시온 상하 크기 수치
-	float XionSize{};
-	SDK::SinLoop XionSizeLoop{};
+	float XionVerticalSize{};
+	SDK::SinLoop XionVerticalSizeLoop{};
 
 	// 시온 대사 루프
 	float XionTextSize{};
@@ -214,11 +214,31 @@ public:
 	}
 
 	void UpdateFunc(float FrameTime) {
+		// 클로에 이드 시온 애니메이션 업데이트
+		UpdateChloeEDXionAnimation(FrameTime);
+
+		// 합계 업데이트
+		UpdateRepResult(FrameTime);
+
+		// 텍스트 애니메이션
+		UpdateTextAnimation(FrameTime);
+
+		// 나가기 업데이트
+		UpdateExit(FrameTime);
+	}
+
+	void RenderFunc() {
+		RenderObjects();
+		if (!ShowRep)  RenderGameoverText();
+		else		   RenderRepResult();
+	}
+
+	void UpdateChloeEDXionAnimation(float FrameTime) {
 		if (SDK::GLOBAL.Ending == GameOver_TimeOut || SDK::GLOBAL.Ending == GameOver_HitXion) {
 			Timer.Update(FrameTime);
 			if (Timer.CheckMiliSec(CheekInterval, 2, CHECK_AND_INTERPOLATE)) {
 				ChloeFrame++;
-				
+
 				// 일정 간격으로 클로에가 이드의 뺨을 때린다
 				if (ChloeFrame == 1) {
 					EDFrame = 1;
@@ -249,26 +269,31 @@ public:
 			}
 		}
 
-		else 
-			XionSizeLoop.Update(XionSize, 0.05, 20.0, FrameTime);
+		// 아무것도 부수지 않았을 시의 애니메이션 
+		// 시온, 이드 값 공유
+		else
+			XionVerticalSizeLoop.Update(XionVerticalSize, 0.05, 20.0, FrameTime);
+	}
 
-		// 텍스트 애니메이션
+	void UpdateTextAnimation(float FrameTime) {
 		TextSizeLoop.Update(TextSize, 0.01, 10.0, FrameTime);
 		XionTextLoop.Update(XionTextSize, 0.01, 20.0, FrameTime);
+	}
 
+	void UpdateRepResult(float FrameTime) {
 		// 각 배상액을 순차적으로 보여준다
 		if (ShowRep) {
-			if(!RepSkip)
+			if (!RepSkip)
 				RepTimer.Update(FrameTime);
 
 			if (CurrentSize != VecSize && RepTimer.CheckMiliSec(0.5, 1, CHECK_AND_INTERPOLATE)) {
 				CurrentSize++;
 				SDK::SoundTool.Play(SDK::SOUND.Rep, SndChannel3);
 			}
-			
+
 			else if (CurrentSize == VecSize && RepTimer.CheckMiliSec(1, 1, CHECK_AND_INTERPOLATE)) {
 				ShowTotalRep = true;
-				if(!RepSkip)
+				if (!RepSkip)
 					SDK::SoundTool.Play(SDK::SOUND.RepTotal, SndChannel3);
 				RepTimer.Stop();
 				RepTimer.Reset();
@@ -285,7 +310,9 @@ public:
 				SDK::Math.Lerp(TextShakeValue, 0.0, 5.0, FrameTime);
 			}
 		}
+	}
 
+	void UpdateExit(float FrameTime) {
 		// 화면이 어두워지면서 홈모드로 전환한다
 		// 볼륨을 부드럽게 줄인다
 		if (ExitState) {
@@ -293,7 +320,7 @@ public:
 			SDK::SoundTool.FadeOut(SndChannel2, 0.5, FrameTime);
 			SDK::SoundTool.FadeOut(SndChannel3, 0.5, FrameTime);
 
-			if(auto Cover = SDK::Scene.Find("cover"); Cover)
+			if (auto Cover = SDK::Scene.Find("cover"); Cover)
 				if (Cover->GetState()) {
 					SDK::System.SetBackColorRGB(122, 138, 154);
 					DeleteTimer.Update(FrameTime);
@@ -306,25 +333,25 @@ public:
 		}
 	}
 
-	void RenderFunc() {
+	void RenderObjects() {
 		// 배경 렌더링
 		Begin();
 		SDK::Transform.Scale(SDK::MoveMatrix, 3.0, 3.0);
 
-		if(SDK::GLOBAL.Ending == GameOver_TimeOut || SDK::GLOBAL.Ending == GameOver_HitXion)
+		if (SDK::GLOBAL.Ending == GameOver_TimeOut || SDK::GLOBAL.Ending == GameOver_HitXion)
 			SDK::ImageTool.RenderImage(SDK::IMAGE.GameOverBackGround, 0.7);
 		else
 			SDK::ImageTool.RenderImage(SDK::IMAGE.GameOverBackGround2, 0.7);
 
 		// 시온 렌더링
 		Begin();
-		SDK::Transform.Move(SDK::MoveMatrix, SDK::ASP(-1.0) + 0.5 + ShiverValue.x, -0.3 + ShiverValue.y + XionSize * 0.5);
-		SDK::Transform.Scale(SDK::MoveMatrix, 1.5, 1.5 + XionSize);
+		SDK::Transform.Move(SDK::MoveMatrix, SDK::ASP(-1.0) + 0.5 + ShiverValue.x, -0.3 + ShiverValue.y + XionVerticalSize * 0.5);
+		SDK::Transform.Scale(SDK::MoveMatrix, 1.5, 1.5 + XionVerticalSize);
 
 		// 엔딩마다 시온의 프레임이 달라진다
-		if(SDK::GLOBAL.Ending == GameOver_HitXion)
+		if (SDK::GLOBAL.Ending == GameOver_HitXion)
 			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.Xion, Xion_Hurt);
-		else if(SDK::GLOBAL.Ending == GameOver_TimeOut)
+		else if (SDK::GLOBAL.Ending == GameOver_TimeOut)
 			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.Xion, Xion_Cry1);
 		else if (SDK::GLOBAL.Ending == GameOver_Suppressed) {
 			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.Xion, Xion_Happy);
@@ -332,8 +359,8 @@ public:
 
 		// 이드 렌더링
 		Begin();
-		SDK::Transform.Move(SDK::MoveMatrix, SDK::ASP(1.0) - 1.03 + ShiverValue2.x - VerticalSize * 0.5, -0.7 - VerticalSize * 0.5 + ShiverValue2.y - XionSize * 0.5);
-		SDK::Transform.Scale(SDK::MoveMatrix, 2.0 + VerticalSize, 2.0 - VerticalSize - XionSize);
+		SDK::Transform.Move(SDK::MoveMatrix, SDK::ASP(1.0) - 1.03 + ShiverValue2.x - VerticalSize * 0.5, -0.7 - VerticalSize * 0.5 + ShiverValue2.y - XionVerticalSize * 0.5);
+		SDK::Transform.Scale(SDK::MoveMatrix, 2.0 + VerticalSize, 2.0 - VerticalSize - XionVerticalSize);
 		SDK::Transform.Tilt(SDK::MoveMatrix, -VerticalSize * 0.5, 0.0);
 
 		if (SDK::GLOBAL.Ending == GameOver_TimeOut || SDK::GLOBAL.Ending == GameOver_HitXion)
@@ -351,85 +378,82 @@ public:
 			SDK::Transform.Tilt(SDK::MoveMatrix, -VerticalSize * 0.5, 0.0);
 			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.Chloe, ChloeFrame);
 		}
+	}
 
-		if (!ShowRep) {
-			// 텍스트 출력
-			ScoreText.SetColor(1.0, 1.0, 1.0);
-			Text.Render(SDK::ASP(-1.0) + 0.8, 0.85, 0.2 + TextSize, Str.c_str());
-			Text.Render(SDK::ASP(-1.0) + 0.6, 0.4, 0.07 + XionTextSize, Str2.c_str());
+	void RenderGameoverText() {
+		// 텍스트 출력
+		ScoreText.SetColor(1.0, 1.0, 1.0);
+		Text.Render(SDK::ASP(-1.0) + 0.8, 0.85, 0.2 + TextSize, Str.c_str());
+		Text.Render(SDK::ASP(-1.0) + 0.6, 0.4, 0.07 + XionTextSize, Str2.c_str());
 
-			// 점수 출력
-			ScoreText.Render(0.0, 0.4, 0.2, L"SCORE\n%d", SDK::GLOBAL.Score);
+		// 점수 출력
+		ScoreText.Render(0.0, 0.4, 0.2, L"SCORE\n%d", SDK::GLOBAL.Score);
 
-			if (NewHighScore) {
-				ScoreText.SetColorRGB(255, 213, 80);
-				ScoreText.Render(0.0, 0.55, 0.1, L"HighScore!");
-			}
-
-			ScoreText.SetColor(1.0, 1.0, 1.0);
-			ScoreText.SetAlign(ALIGN_LEFT);
-			ScoreText.SetHeightAlign(HEIGHT_ALIGN_UNDER);
-			ScoreText.Render(SDK::ASP(1.0) - 0.05, 0.95, 0.1, L"Enter를 눌러 계속");
-			ScoreText.SetAlign(ALIGN_MIDDLE);
-			ScoreText.SetHeightAlign(HEIGHT_ALIGN_MIDDLE);
+		if (NewHighScore) {
+			ScoreText.SetColorRGB(255, 213, 80);
+			ScoreText.Render(0.0, 0.55, 0.1, L"HighScore!");
 		}
 
-		// 배상금 출력
-		else {
-			// 뒷 배경 출력
-			Rect.Draw(0.0, 0.0, SDK::ASP(2.0), 2.0, 0.0, 0.6);
+		ScoreText.SetColor(1.0, 1.0, 1.0);
+		ScoreText.SetAlign(ALIGN_LEFT);
+		ScoreText.SetHeightAlign(HEIGHT_ALIGN_UNDER);
+		ScoreText.Render(SDK::ASP(1.0) - 0.05, 0.95, 0.1, L"Enter를 눌러 계속");
+		ScoreText.SetAlign(ALIGN_MIDDLE);
+		ScoreText.SetHeightAlign(HEIGHT_ALIGN_MIDDLE);
+	}
 
-			// 배상금 계산
-			float RenderHeight{ 0.8 };
+	void RenderRepResult() {
+		// 뒷 배경 출력
+		Rect.Draw(0.0, 0.0, SDK::ASP(2.0), 2.0, 0.0, 0.6);
 
-			for (int i = 0; i < CurrentSize; i++) {
-				ScoreText.SetColor(1.0, 1.0, 1.0);
+		// 배상금 계산
+		float RenderHeight{ 0.8 };
 
-				switch (RepVec[i].DestroyedType) {
-				case Item_BoxCoffee:
-					ScoreText.Render(0.0, RenderHeight, 0.1, L"커피 상자 배상: %d개 x 25000골드", SDK::GLOBAL.DestroyedItems[RepVec[i].DestroyedType]);
-					break;
+		for (int i = 0; i < CurrentSize; i++) {
+			ScoreText.SetColor(1.0, 1.0, 1.0);
 
-				case Item_BottleCoffee:
-					ScoreText.Render(0.0, RenderHeight, 0.1, L"병 커피 배상: %d개 x 2500골드", SDK::GLOBAL.DestroyedItems[RepVec[i].DestroyedType]);
-					break;
+			switch (RepVec[i].DestroyedType) {
+			case Item_BoxCoffee:
+				ScoreText.Render(0.0, RenderHeight, 0.1, L"커피 상자 배상: %d개 x 25000골드", SDK::GLOBAL.DestroyedItems[RepVec[i].DestroyedType]);
+				break;
 
-				case Item_CanCoffee:
-					ScoreText.Render(0.0, RenderHeight, 0.1, L"캔 커피 배상: %d개 x 1200골드", SDK::GLOBAL.DestroyedItems[RepVec[i].DestroyedType]);
-					break;
+			case Item_BottleCoffee:
+				ScoreText.Render(0.0, RenderHeight, 0.1, L"병 커피 배상: %d개 x 2500골드", SDK::GLOBAL.DestroyedItems[RepVec[i].DestroyedType]);
+				break;
 
-				case Item_People:
-					ScoreText.Render(0.0, RenderHeight, 0.1, L"폭행 피해 합의금: %d명 x 2000000골드", SDK::GLOBAL.DestroyedItems[RepVec[i].DestroyedType]);
-					break;
+			case Item_CanCoffee:
+				ScoreText.Render(0.0, RenderHeight, 0.1, L"캔 커피 배상: %d개 x 1200골드", SDK::GLOBAL.DestroyedItems[RepVec[i].DestroyedType]);
+				break;
 
-				case Item_Xion:
-					ScoreText.Render(0.0, RenderHeight, 0.1, L"시온 치료비: 1000000골드");
-					break;
+			case Item_People:
+				ScoreText.Render(0.0, RenderHeight, 0.1, L"폭행 피해 합의금: %d명 x 2000000골드", SDK::GLOBAL.DestroyedItems[RepVec[i].DestroyedType]);
+				break;
 
-				case Item_HouseDoc:
-					ScoreText.Render(0.0, RenderHeight, 0.1, L"불 탄 집문서 배상: %d장 x 100000골드", SDK::GLOBAL.DestroyedItems[RepVec[i].DestroyedType]);
-					break;
-				}
+			case Item_Xion:
+				ScoreText.Render(0.0, RenderHeight, 0.1, L"시온 치료비: 1000000골드");
+				break;
 
-				RenderHeight -= 0.2;
+			case Item_HouseDoc:
+				ScoreText.Render(0.0, RenderHeight, 0.1, L"불 탄 집문서 배상: %d장 x 100000골드", SDK::GLOBAL.DestroyedItems[RepVec[i].DestroyedType]);
+				break;
 			}
 
-			if (ShowTotalRep) {
-				ScoreText.SetColorRGB(255, 213, 80);
-				ScoreText.Render(TextShake.x, -0.7 + TextShake.y, 0.15, L"합계: %d 골드", TotalRep);
-
-				if (NewHighRep)
-					ScoreText.Render(TextShake.x, -0.5 + TextShake.y, 0.1, L"역대급!!");
-			}
-
-			if (ShowRep) {
-				ScoreText.SetColor(1.0, 1.0, 1.0);
-				ScoreText.SetAlign(ALIGN_LEFT);
-				ScoreText.SetHeightAlign(HEIGHT_ALIGN_DEFAULT);
-				ScoreText.Render(SDK::ASP(1.0) - 0.05, -0.95, 0.1, L"Enter를 눌러 계속");
-				ScoreText.SetAlign(ALIGN_MIDDLE);
-				ScoreText.SetHeightAlign(HEIGHT_ALIGN_MIDDLE);
-			}
+			RenderHeight -= 0.2;
 		}
+
+		if (ShowTotalRep) {
+			ScoreText.SetColorRGB(255, 213, 80);
+			ScoreText.Render(TextShake.x, -0.7 + TextShake.y, 0.15, L"합계: %d 골드", TotalRep);
+
+			if (NewHighRep)
+				ScoreText.Render(TextShake.x, -0.5 + TextShake.y, 0.1, L"역대급!!");
+		}
+
+		ScoreText.SetColor(1.0, 1.0, 1.0);
+		ScoreText.SetAlign(ALIGN_LEFT);
+		ScoreText.SetHeightAlign(HEIGHT_ALIGN_DEFAULT);
+		ScoreText.Render(SDK::ASP(1.0) - 0.05, -0.95, 0.1, L"Enter를 눌러 계속");
+		ScoreText.SetAlign(ALIGN_MIDDLE);
+		ScoreText.SetHeightAlign(HEIGHT_ALIGN_MIDDLE);
 	}
 };

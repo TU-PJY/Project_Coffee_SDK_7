@@ -190,7 +190,6 @@ public:
 
 						if ((BreakCount < MaxBreak - 1)) {
 							ItemStruct NextItem = Shelf->GetNextCoffee();
-							std::cout << NextItem.IsPeopleFront << std::endl;
 
 							// 다음 자리에 사람이 있다면 사람 강조 표시를 활성화 한다
 							if (NextItem.IsPeopleFront) {

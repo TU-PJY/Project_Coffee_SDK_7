@@ -32,8 +32,8 @@ public:
 		ps.AddGravityAcc(RandomAcc);
 
 		// 최소 바운스 수치와 바운드 감소 수치 설정
-		ps.SetMinimumRebounce(2.0);
-		ps.SetRebounceReduce(3.0);
+		ps.SetMinimumRebounce(1.0);
+		ps.SetRebounceReduce(2.0);
 
 		// 랜덤 속도 지정
 		MoveSpeed = SDK::Random.Gen(RANDOM_TYPE_REAL, 1.0, 3.0);
