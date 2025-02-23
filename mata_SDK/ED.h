@@ -11,11 +11,14 @@ private:
 	float DestPosition{};
 
 	// 카메라 위치
-	float EDCameraPosition{0.7};
+	float EDCameraPosition{};
 	float EDCameraHeight{};
 
 	// 카메라 줌 
 	float EDCameraZoom{1.0};
+
+	// 카메라 오프셋
+	float CameraOffset{ 0.9 };
 
 	// 각 상태마다 다른 프레임을 출력한다
 	int Frame = ED_Idle;
@@ -86,7 +89,7 @@ private:
 
 public:
 	ED() {
-		EDCameraPosition = DestPosition + 0.7;
+		EDCameraPosition = DestPosition + CameraOffset;
 		SDK::CameraControl.Move(EDCameraPosition, 0.0);
 		SDK::CameraControl.SetZoom(1.0);
 
@@ -296,7 +299,7 @@ public:
 			SDK::Math.Lerp(Position, DestPosition, 20.0, FrameTime);
 
 			// 카메라가 이드를 부드럽게 따라오도록 한다
-			SDK::Math.Lerp(EDCameraPosition, DestPosition + 0.7, 7.0, FrameTime);
+			SDK::Math.Lerp(EDCameraPosition, DestPosition + CameraOffset, 7.0, FrameTime);
 
 			// 이드를 약간 오른쪽에서 바라보도록 한다
 			SDK::CameraControl.Move(EDCameraPosition + PushCameraOffset, 0.0);

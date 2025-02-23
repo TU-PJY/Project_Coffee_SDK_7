@@ -99,14 +99,13 @@ void SDK::Physics::UpdateBouncing(float& HeightPosition, float FrameTime) {
 
 		if (CheckFloorCollision(HeightPosition)) {
 			HeightPosition = FloorHeight + HeightOffset;
+			GravityAcc *= -1;
 			GravityAcc -= RebounceReduce;
 
 			if (fabs(GravityAcc) <= MinRebounceValue) {
 				GravityAcc = 0.0;
 				LandOnFloor(HeightPosition);
 			}
-			else
-				GravityAcc *= -1;
 		}
 	}
 }
@@ -118,14 +117,13 @@ void SDK::Physics::UpdateBouncing(SDK::Vector2& DestPosition, float FrameTime) {
 
 		if (CheckFloorCollision(DestPosition.y)) {
 			DestPosition.y = FloorHeight + HeightOffset;
+			GravityAcc *= -1;
 			GravityAcc -= RebounceReduce;
 
 			if (fabs(GravityAcc) <= MinRebounceValue) {
 				GravityAcc = 0.0;
 				LandOnFloor(DestPosition.y);
 			}
-			else 
-				GravityAcc *= -1;
 		}
 	}
 }

@@ -1,12 +1,13 @@
 #include "Cover.h"
 
-Cover::Cover() {
+Cover::Cover(float Speed) {
 	Rect.SetColor(0.0, 0.0, 0.0);
 	Rect.SetRenderType(RENDER_TYPE_STATIC);
+	OpacitySpeed = Speed;
 }
 
 void Cover::UpdateFunc(float FrameTime) {
-	Opacity += FrameTime * 0.5;
+	Opacity += FrameTime * OpacitySpeed;
 	SDK::EXTool.ClampValue(Opacity, 1.0, CLAMP_GREATER);
 }
 

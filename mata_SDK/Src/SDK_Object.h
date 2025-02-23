@@ -59,10 +59,13 @@ namespace SDK {
 		// Obtains an BoundingCircle object from a specific object class.
 		virtual SDK::BoundingCircle GetBoundingCircle() { return {}; }
 
-		// timewatch functions
-		virtual void Stop() {}
+		// playmode manager functions
+		virtual void SetGoToTitle() {}
 		virtual void PlayBGM() {}
 		virtual void StopBGM() {}
+
+		// timewatch functions
+		virtual void Stop() {}
 		virtual void Start() {}
 		virtual void AddTime() {}
 		virtual void DeleteTime() {}
