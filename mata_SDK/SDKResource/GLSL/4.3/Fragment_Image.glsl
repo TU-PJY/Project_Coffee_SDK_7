@@ -44,5 +44,8 @@ void main() {
     else
         FinalResult = texture(OutTexture, TextureCoord);
 
+     if (FinalResult.a < 0.001) 
+        discard;
+
     FragColor = vec4(FinalResult.rgb + Color.rgb, FinalResult.a * Opacity);
 }

@@ -26,6 +26,12 @@ DWORD WINAPI ImageResourceLoader(LPVOID lpParam) {
 	SDK::ImageTool.SetSpriteSheetSize(256, 256, 2, 1);
 	SDK::ImageTool.LoadSpriteSheetT(SDK::IMAGE.CreditXion, "Assets//Sprite//People//sheet-xion-credit.png");
 
+	SDK::ImageTool.SetSpriteSheetSize(256, 256, 4, 1);
+	SDK::ImageTool.LoadSpriteSheetT(SDK::IMAGE.CreditEDBack, "Assets//Sprite//People//sheet-ed-credit-back.png");
+
+	SDK::ImageTool.SetSpriteSheetSize(256, 256, 2, 1);
+	SDK::ImageTool.LoadSpriteSheetT(SDK::IMAGE.CreditXionBack, "Assets//Sprite//People//sheet-xion-credit-back.png");
+
 	SDK::ImageTool.SetSpriteSheetSize(256, 256, 3, 1);
 	SDK::ImageTool.LoadSpriteSheetT(SDK::IMAGE.Shelf, "Assets//Sprite//Object//sheet-shelf.png");
 

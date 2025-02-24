@@ -42,7 +42,9 @@ namespace SDK {
 		Image Pillar{};
 
 		SpriteSheet CreditED{};
+		SpriteSheet CreditEDBack{};
 		SpriteSheet CreditXion{};
+		SpriteSheet CreditXionBack{};
 		SpriteSheet Sofa{};
 
 		Image TV{};

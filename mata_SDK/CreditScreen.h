@@ -259,19 +259,41 @@ public:
 			Begin();
 			SDK::Transform.Move(SDK::MoveMatrix, XionPosition, XionSize * 0.5);
 			SDK::Transform.Scale(SDK::MoveMatrix, 2.0, 2.0 + XionSize);
+			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.CreditXionBack, 0);
 			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.CreditXion, 0);
 
 			// 이드 몸통
 			Begin();
 			SDK::Transform.Move(SDK::MoveMatrix, EDPosition, EDSize * 0.5);
 			SDK::Transform.Scale(SDK::MoveMatrix, 2.0, 2.0 + EDSize);
+			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.CreditEDBack, EDFrame);
 			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.CreditED, EDFrame);
+
+
+			SDK::ColorClip.First();
 
 			// 소파 쿠션 부분
 			Begin();
 			SDK::Transform.Scale(SDK::MoveMatrix, 4.0, 4.0);
 			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.Sofa, 2);
 			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.Sofa, 1);
+
+			SDK::ColorClip.Second();
+
+			// 시온 다리 배경
+			Begin();
+			SDK::Transform.Move(SDK::MoveMatrix, XionPosition, XionSize * 0.5);
+			SDK::Transform.Scale(SDK::MoveMatrix, 2.0, 2.0 + XionSize);
+			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.CreditXionBack, 1);
+
+			// 이드 다리 배경 
+			Begin();
+			SDK::Transform.Move(SDK::MoveMatrix, EDPosition, EDSize * 0.5);
+			SDK::Transform.Scale(SDK::MoveMatrix, 2.0, 2.0 + EDSize);
+			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.CreditEDBack, 3);
+
+			SDK::ColorClip.End();
+
 
 			// 시온 다리
 			Begin();

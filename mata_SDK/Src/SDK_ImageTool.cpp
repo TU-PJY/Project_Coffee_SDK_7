@@ -419,6 +419,7 @@ void SDK::SDK_ImageTool::RenderSpriteSheet(SDK::SpriteSheet& SpriteSheetStruct, 
 	ProcessTransform(Width, Height, OpacityValue, ApplyUnitTransform, DisableAdjustAspect);
 	PrepareRender(SpriteSheetStruct);
 
+
 	glBindTexture(GL_TEXTURE_2D, SpriteSheetStruct.Texture[(int)Frame]);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
