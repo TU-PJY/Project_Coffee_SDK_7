@@ -121,7 +121,7 @@ public:
 	}
 
 	void UpdateFunc(float FrameTime) {
-		EDLoop.Update(EDSize, 0.01, 4.0, FrameTime);
+		EDLoop.Update(EDSize, 0.005, 4.0, FrameTime);
 		XionLoop.Update(XionSize, 0.03, 1.0, FrameTime);
 		LightLoop.Update(LightOpacity, 0.2, 20.0, FrameTime);
 
@@ -205,6 +205,12 @@ public:
 			Rect.Draw(0.0, 0.0, SDK::ASP(2.0), 2.0);
 
 		else {
+			// ÃÑ
+			Begin();
+			SDK::Transform.Move(SDK::MoveMatrix, 1.8, 0.5);
+			SDK::Transform.Scale(SDK::MoveMatrix, 1.6, 1.6);
+			SDK::ImageTool.RenderImage(SDK::IMAGE.Gun);
+
 			// ¹Ù´Ú
 			Begin();
 			SDK::Transform.Move(SDK::MoveMatrix, CreditPosition, -1.5);

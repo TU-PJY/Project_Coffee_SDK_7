@@ -51,7 +51,9 @@ DWORD WINAPI ImageResourceLoader(LPVOID lpParam) {
 	SDK::ImageTool.LoadImageT(SDK::IMAGE.TV, "Assets///Sprite//Object//TV.png");
 	SDK::ImageTool.LoadImageT(SDK::IMAGE.TVLight, "Assets//Sprite//Object//TV-light.png");
 	SDK::ImageTool.LoadImageT(SDK::IMAGE.Chair, "Assets//Sprite//Object//chair.png");
-
+	SDK::ImageTool.LoadImageT(SDK::IMAGE.Gun, "Assets//Sprite//Object//gun.png");
+	SDK::ImageTool.LoadImageT(SDK::IMAGE.Machine, "Assets//Sprite//Object//machine.png");
+	SDK::ImageTool.LoadImageT(SDK::IMAGE.Nata, "Assets//Sprite//Object//nata.png");
 
 
 	SDK::ImageTool.LoadImageT(SDK::IMAGE.FloorTile, "Assets//Sprite//Background//floor.png");

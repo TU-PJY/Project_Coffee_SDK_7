@@ -48,6 +48,9 @@ namespace SDK {
 		Image TV{};
 		Image TVLight{};
 		Image Chair{};
+		Image Gun{};
+		Image Machine{};
+		Image Nata{};
 
 		Image Title{};
 		Image Tutorial{};
