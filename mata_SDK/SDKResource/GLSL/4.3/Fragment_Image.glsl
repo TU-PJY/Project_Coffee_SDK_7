@@ -1,4 +1,4 @@
-#version 460 core
+#version 430 compatibility
 
 layout(location = 0) out vec4 FragColor;
 uniform sampler2D OutTexture;

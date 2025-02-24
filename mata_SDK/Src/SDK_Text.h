@@ -51,7 +51,6 @@ namespace SDK {
 	public:
 		~Text();
 		void Init(SDK::FontName FontName, int Type=FW_DONTCARE, int Italic = FALSE);
-		void Reset(int RenderTypeFlag = RENDER_TYPE_STATIC);
 		void SetColor(float R, float G, float B);
 		void SetColor(SDK::Color3& Color);
 		void SetColorRGB(int R, int G, int B);

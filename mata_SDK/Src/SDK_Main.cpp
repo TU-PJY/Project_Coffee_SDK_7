@@ -61,7 +61,7 @@ void main(int argc, char** argv) {
 		SDK::LOCALE = LocaleName;
 		std::wcout << L"Windows System Locale: " << SDK::LOCALE << std::endl;
 	}
-		
+
 	SDK::System.SetupSystem(argc, argv);
 	glutDisplayFunc(SDK::System.Main);
 	glutReshapeFunc(SDK::System.DisplayReshape);

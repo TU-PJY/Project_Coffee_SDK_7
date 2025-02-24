@@ -1,4 +1,4 @@
-#version 460 core
+#version 440 compatibility
 
 layout(std430, binding = 0) readonly buffer MatrixInput {
     mat4 Matrix1;

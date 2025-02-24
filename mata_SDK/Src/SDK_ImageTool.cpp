@@ -67,7 +67,8 @@ void SDK::SDK_ImageTool::LoadImage(SDK::Image& ImageStruct, std::string FilePath
 		return;
 	}
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Width, Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, TextureData);
+	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, Width, Height);
+	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, Width, Height, GL_RGBA, GL_UNSIGNED_BYTE, TextureData);
 	stbi_image_free(TextureData);
 
 	ImageStruct.Width = Width;
@@ -114,7 +115,8 @@ void SDK::SDK_ImageTool::LoadClip(SDK::Image& ImageStruct, std::string FilePath,
 	for (int Row = 0; Row < ClipHeight; ++Row)
 		memcpy(ClippedTextureData + Row * ClipWidth * Channel, TextureData + ((Y + Row) * Width + X) * Channel, ClipWidth * Channel);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, ClipWidth, ClipHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, ClippedTextureData);
+	glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, ClipWidth, ClipHeight);
+	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, ClipWidth, ClipHeight, GL_RGBA, GL_UNSIGNED_BYTE, TextureData);
 	stbi_image_free(TextureData);
 	stbi_image_free(ClippedTextureData);
 
@@ -141,9 +143,9 @@ void SDK::SDK_ImageTool::LoadSpriteSheet(SDK::SpriteSheet& SpriteSheetStruct, st
 
 	SpriteSheetStruct.Texture.assign(NumRow * NumCol, {});
 
-	if (BlankLocation != 0) 
+	if (BlankLocation != 0)
 		SpriteSheetStruct.Frame = NumRow * NumCol - (NumRow - BlankLocation);
-	else 
+	else
 		SpriteSheetStruct.Frame = NumRow * NumCol;
 
 	int CurrentIndex{};
@@ -179,7 +181,8 @@ void SDK::SDK_ImageTool::LoadSpriteSheet(SDK::SpriteSheet& SpriteSheetStruct, st
 			for (int i = 0; i < ClipHeight; ++i)
 				memcpy(ClippedTextureData + i * ClipWidth * Channel, TextureData + ((CurrentYPosition + i) * Width + CurrentXPosition) * Channel, ClipWidth * Channel);
 
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, ClipWidth, ClipHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, ClippedTextureData);
+			glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, ClipWidth, ClipHeight);
+			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, ClipWidth, ClipHeight, GL_RGBA, GL_UNSIGNED_BYTE, TextureData);
 			stbi_image_free(ClippedTextureData);
 
 			CurrentXPosition += ClipWidth;
@@ -326,7 +329,8 @@ void SDK::SDK_ImageTool::Map() {
 				break;
 			}
 
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, B.ImagePtr->Width, B.ImagePtr->Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, B.TextureData);
+			glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, B.ImagePtr->Width, B.ImagePtr->Height);
+			glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, B.ImagePtr->Width, B.ImagePtr->Height, GL_RGBA, GL_UNSIGNED_BYTE, B.TextureData);
 			stbi_image_free(B.TextureData);
 		}
 
@@ -354,7 +358,8 @@ void SDK::SDK_ImageTool::Map() {
 					break;
 				}
 
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, B.SpriteSheetPtr->Width, B.SpriteSheetPtr->Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, B.TextureData[i]);
+				glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, B.SpriteSheetPtr->Width, B.SpriteSheetPtr->Height);
+				glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, B.SpriteSheetPtr->Width, B.SpriteSheetPtr->Height, GL_RGBA, GL_UNSIGNED_BYTE, B.TextureData[i]);
 				stbi_image_free(B.TextureData[i]);
 			}
 		}

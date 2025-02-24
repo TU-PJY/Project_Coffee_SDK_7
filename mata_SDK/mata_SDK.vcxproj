@@ -265,11 +265,26 @@
     <Text Include="ModeTemplate.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SDKResource\GLSL\ComputeMatrix.glsl" />
-    <None Include="SDKResource\GLSL\Fragment_Image.glsl" />
-    <None Include="SDKResource\GLSL\Fragment_Shape.glsl" />
-    <None Include="SDKResource\GLSL\Fragment_Text.glsl" />
-    <None Include="SDKResource\GLSL\Vertex.glsl" />
+    <None Include="SDKResource\GLSL\4.3\ComputeMatrix.glsl" />
+    <None Include="SDKResource\GLSL\4.3\Fragment_Image.glsl" />
+    <None Include="SDKResource\GLSL\4.3\Fragment_Shape.glsl" />
+    <None Include="SDKResource\GLSL\4.3\Fragment_Text.glsl" />
+    <None Include="SDKResource\GLSL\4.3\Vertex.glsl" />
+    <None Include="SDKResource\GLSL\4.4\ComputeMatrix.glsl" />
+    <None Include="SDKResource\GLSL\4.4\Fragment_Image.glsl" />
+    <None Include="SDKResource\GLSL\4.4\Fragment_Shape.glsl" />
+    <None Include="SDKResource\GLSL\4.4\Fragment_Text.glsl" />
+    <None Include="SDKResource\GLSL\4.4\Vertex.glsl" />
+    <None Include="SDKResource\GLSL\4.5\ComputeMatrix.glsl" />
+    <None Include="SDKResource\GLSL\4.5\Fragment_Image.glsl" />
+    <None Include="SDKResource\GLSL\4.5\Fragment_Shape.glsl" />
+    <None Include="SDKResource\GLSL\4.5\Fragment_Text.glsl" />
+    <None Include="SDKResource\GLSL\4.5\Vertex.glsl" />
+    <None Include="SDKResource\GLSL\4.6\ComputeMatrix.glsl" />
+    <None Include="SDKResource\GLSL\4.6\Fragment_Image.glsl" />
+    <None Include="SDKResource\GLSL\4.6\Fragment_Shape.glsl" />
+    <None Include="SDKResource\GLSL\4.6\Fragment_Text.glsl" />
+    <None Include="SDKResource\GLSL\4.6\Vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

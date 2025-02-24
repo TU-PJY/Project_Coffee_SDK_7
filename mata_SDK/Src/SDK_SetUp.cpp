@@ -36,6 +36,8 @@ SDK::START_MODE_PTR SDK::START_MODE;
 
 HWND SDK::SystemHWND;
 
+int MajorVersion, MinorVersion;
+
 void SDK::SDK_System::SetupSystem(int argc, char** argv) {
 	glutInit(&argc, argv);
 	SetupWindow();
@@ -47,9 +49,25 @@ void SDK::SDK_System::SetupSystem(int argc, char** argv) {
 void SDK::SDK_System::SetupWindow() {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GL_MULTISAMPLE);
 
+	glutInitContextVersion(4, 3); // OpenGL 4.3
+	glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
+
 	glutInitWindowPosition(GetSystemMetrics(SM_CXSCREEN) / 2 - SDK::WIDTH / 2, GetSystemMetrics(SM_CYSCREEN) / 2 - SDK::HEIGHT / 2);
 	glutInitWindowSize(SDK::WIDTH, SDK::HEIGHT);
 	glutCreateWindow(WINDOW_NAME);
+
+	const unsigned char* Version = glGetString(GL_VERSION);
+	std::cout << Version << std::endl;
+
+	glGetIntegerv(GL_MAJOR_VERSION, &MajorVersion);
+	glGetIntegerv(GL_MINOR_VERSION, &MinorVersion);
+	std::cout << "OpenGL Version: " << MajorVersion << "." << MinorVersion << std::endl;
+
+	if (MajorVersion < 4 || (MajorVersion == 4 && MinorVersion < 3)) {
+		int Result = MessageBox(NULL, L"그래픽카드의 OpenGL 지원 버전이 너무 낮습니다. 최소 OpenGL 4.3 버전을 지원해야 합니다.", L"mata_SDK Error", MB_OK | MB_ICONINFORMATION);
+		if (Result == IDOK)
+			SDK::System.Exit();
+	}
 
 	if (FULL_SCREEN_OPTION) {
 		glutFullScreen();
@@ -63,9 +81,6 @@ void SDK::SDK_System::SetupWindow() {
 		exit(EXIT_FAILURE);
 	}
 
-	const GLubyte* Version = glGetString(GL_VERSION);
-	std::cout << Version << std::endl;
-
 	if (DISABLE_ALT_EVENT) {
 		RegisterHotKey(NULL, 1, MOD_ALT, VK_MENU);
 		RegisterHotKey(NULL, 2, MOD_ALT | MOD_NOREPEAT, VK_MENU);
@@ -75,19 +90,21 @@ void SDK::SDK_System::SetupWindow() {
 }
 
 void SDK::SDK_System::LoadShader() {
-	SDK::Shader.LoadVertexShader("SDKResource//GLSL//Vertex.glsl");
-	SDK::Shader.LoadFragmentShader("SDKResource//GLSL//Fragment_Image.glsl");
+	std::string FolderName = "SDKResource//GLSL//" + std::to_string(MajorVersion) + "." + std::to_string(MinorVersion) + "//";
+
+	SDK::Shader.LoadVertexShader(std::string(FolderName + "Vertex.glsl"));
+	SDK::Shader.LoadFragmentShader(std::string(FolderName + "Fragment_Image.glsl"));
 	SDK::Shader.CreateShader(IMAGE_SHADER);
 
-	SDK::Shader.LoadVertexShader("SDKResource//GLSL//Vertex.glsl");
-	SDK::Shader.LoadFragmentShader("SDKResource//GLSL//Fragment_Text.glsl");
+	SDK::Shader.LoadVertexShader(std::string(FolderName + "Vertex.glsl"));
+	SDK::Shader.LoadFragmentShader(std::string(FolderName + "Fragment_Text.glsl"));
 	SDK::Shader.CreateShader(TEXT_SHADER);
 
-	SDK::Shader.LoadVertexShader("SDKResource//GLSL//Vertex.glsl");
-	SDK::Shader.LoadFragmentShader("SDKResource//GLSL//Fragment_Shape.glsl");
+	SDK::Shader.LoadVertexShader(std::string(FolderName + "Vertex.glsl"));
+	SDK::Shader.LoadFragmentShader(std::string(FolderName + "Fragment_Shape.glsl"));
 	SDK::Shader.CreateShader(SHAPE_SHADER);
 
-	SDK::Shader.LoadComputeShader("SDKResource//GLSL//ComputeMatrix.glsl");
+	SDK::Shader.LoadComputeShader(std::string(FolderName + "ComputeMatrix.glsl"));
 	SDK::Shader.CreateComputeShader(MATRIX_COMPT_SHADER);
 
 	SDK::Shader.CreateShaderLocation();

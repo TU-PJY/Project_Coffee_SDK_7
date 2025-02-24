@@ -231,8 +231,8 @@ public:
 
 			// 생명장치
 			Begin();
-			SDK::Transform.Move(SDK::MoveMatrix, -2.0, 0.3);
-			SDK::Transform.Scale(SDK::MoveMatrix, 2.2, 2.2);
+			SDK::Transform.Move(SDK::MoveMatrix, -2.0, 0.2);
+			SDK::Transform.Scale(SDK::MoveMatrix, 2.1, 2.1);
 			SDK::ImageTool.RenderImage(SDK::IMAGE.Machine);
 
 			// 나타
