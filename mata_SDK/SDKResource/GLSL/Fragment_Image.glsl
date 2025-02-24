@@ -1,12 +1,12 @@
-#version 330 core
+#version 460 core
+
+layout(location = 0) out vec4 FragColor;
+uniform sampler2D OutTexture;
 
 in vec3           FragPosition;
 in vec2           TextureCoord;
 
-out vec4          FragColor;
 uniform vec3      ViewPosition;
-
-uniform sampler2D OutTexture;
 uniform float     Opacity;
 uniform vec3      Color;
 
@@ -26,12 +26,13 @@ vec4 ComputeBlur() {
             vec2 Offset = vec2(float(x), float(y)) * TextureSize;
             float DistanceSq = float(x * x + y * y);
             float Weight = exp(-DistanceSq / TwoSigmaSq);
-            vec4 sample = texture(OutTexture, TextureCoord + Offset);
-            ReturnColor += sample * Weight;
+            vec2 SampleCoord = clamp(TextureCoord + Offset, vec2(0.0), vec2(1.0));
+            vec4 SampleColor = texture(OutTexture, SampleCoord);
+            ReturnColor += SampleColor * Weight;
             TotalWeight += Weight;
         }
     }
-    
+
     return ReturnColor / TotalWeight;
 }
 

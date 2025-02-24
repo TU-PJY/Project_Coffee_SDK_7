@@ -1,9 +1,9 @@
-#version 330 core
+#version 460 core
+
+layout(location = 0) out vec4 FragColor;
 
 in vec3       FragPosition;
 in vec2       TextureCoord;
-
-out vec4      FragColor;
 
 uniform vec3  Color;
 uniform vec3  ViewPosition;

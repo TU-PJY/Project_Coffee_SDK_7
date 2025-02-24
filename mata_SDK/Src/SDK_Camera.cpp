@@ -27,7 +27,7 @@ void SDK::SDK_Camera::SetCamera(int RenderType) {
 		CalculateASPECT();
 
 	CamPos = SDK::Vector3(0.0f, 0.0f, 1.0f);
-	CamDirection = SDK::Vector3(0.0f, 0.0f, 0.0f);
+	CamDirection = SDK::Vector3(0.0f, 0.0f, -1.0f);
 	CamUp = SDK::Vector3(0.0f, 1.0f, 0.0f);
 
 	StaticRenderCommand = RenderType;

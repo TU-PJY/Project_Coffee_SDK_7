@@ -540,6 +540,12 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
+    <None Include="SDKResource\GLSL\Fragment_Text.glsl">
+      <Filter>[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]</Filter>
+    </None>
+    <None Include="SDKResource\GLSL\Vertex.glsl">
+      <Filter>[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]</Filter>
+    </None>
     <None Include="SDKResource\GLSL\ComputeMatrix.glsl">
       <Filter>[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]</Filter>
     </None>
@@ -547,12 +553,6 @@
       <Filter>[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]</Filter>
     </None>
     <None Include="SDKResource\GLSL\Fragment_Shape.glsl">
-      <Filter>[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]</Filter>
-    </None>
-    <None Include="SDKResource\GLSL\Fragment_Text.glsl">
-      <Filter>[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]</Filter>
-    </None>
-    <None Include="SDKResource\GLSL\Vertex.glsl">
       <Filter>[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]</Filter>
     </None>
   </ItemGroup>
