@@ -36,7 +36,7 @@ void SDK::SDK_ImageTool::Init() {
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
-	glBindVertexArray(0);
+	glBindVertexArray(VAO);
 
 	stbi_set_flip_vertically_on_load(true);
 }
@@ -405,7 +405,6 @@ void SDK::SDK_ImageTool::RenderImage(SDK::Image& ImageStruct, float OpacityValue
 	ProcessTransform(Width, Height, OpacityValue, ApplyUnitTransform, DisableAdjustAspect);
 	PrepareRender(ImageStruct);
 
-	glBindVertexArray(VAO);
 	glBindTexture(GL_TEXTURE_2D, ImageStruct.Texture);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
@@ -420,7 +419,6 @@ void SDK::SDK_ImageTool::RenderSpriteSheet(SDK::SpriteSheet& SpriteSheetStruct, 
 	ProcessTransform(Width, Height, OpacityValue, ApplyUnitTransform, DisableAdjustAspect);
 	PrepareRender(SpriteSheetStruct);
 
-	glBindVertexArray(VAO);
 	glBindTexture(GL_TEXTURE_2D, SpriteSheetStruct.Texture[(int)Frame]);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
@@ -432,13 +430,11 @@ void SDK::SDK_ImageTool::RenderStaticSpriteSheet(SDK::SpriteSheet& SpriteSheetSt
 	ProcessTransform(Width, Height, OpacityValue, ApplyUnitTransform, DisableAdjustAspect);
 	PrepareRender(SpriteSheetStruct);
 
-	glBindVertexArray(VAO);
 	glBindTexture(GL_TEXTURE_2D, SpriteSheetStruct.Texture[Frame]);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 void SDK::SDK_ImageTool::RenderRaw() {
-	glBindVertexArray(VAO);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
