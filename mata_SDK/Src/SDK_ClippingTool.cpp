@@ -27,6 +27,7 @@ void SDK::SDK_ColorClipping::End() {
 }
 
 void SDK::SDK_AlphaClipping::First() {
+	ClippingState = true;
 	glEnable(GL_STENCIL_TEST);
 	glClear(GL_STENCIL_BUFFER_BIT);
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
@@ -42,4 +43,5 @@ void SDK::SDK_AlphaClipping::Second() {
 
 void SDK::SDK_AlphaClipping::End() {
 	glDisable(GL_STENCIL_TEST);
+	ClippingState = false;
 }
