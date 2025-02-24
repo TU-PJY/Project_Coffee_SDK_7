@@ -6,8 +6,8 @@
 constexpr const char* WINDOW_NAME = "mata_SDK 7";
 
 // window size
-constexpr int WINDOW_WIDTH = 1200;
-constexpr int WINDOW_HEIGHT = 800;
+constexpr int WINDOW_WIDTH = 1000;
+constexpr int WINDOW_HEIGHT = 500;
 
 // fullscreen option
 constexpr bool FULL_SCREEN_OPTION = false;

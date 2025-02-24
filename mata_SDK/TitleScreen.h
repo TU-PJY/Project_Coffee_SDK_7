@@ -24,6 +24,8 @@ private:
 	bool TutorialState{};
 	// 튜토리얼 객체 추가 여부
 	bool TutorialAdded{};
+	// 크래딧 모드 전환 여부
+	bool CreditStartState{};
 
 	// 타이틀 이미지 위치
 	SDK::Vector2 TitleImagePosition{};
@@ -118,6 +120,7 @@ public:
 		TitleRect.SetRenderType(RENDER_TYPE_STATIC);
 
 		// BGM 재생
+		SDK::SoundTool.SetVolume(SDK::CHANNEL.BGM, SDK::GLOBAL.BGMVolume);
 		SDK::SoundTool.Play(SDK::SOUND.TitleBgm, SDK::CHANNEL.BGM);
 	}
 
@@ -151,6 +154,15 @@ public:
 			}
 		}
 
+		if (CreditStartState) {
+			RectOpacity += 1.0 * FrameTime;
+			SDK::SoundTool.FadeOut(SDK::CHANNEL.BGM, 1.0, FrameTime);
+			if (SDK::EXTool.CheckClampValue(RectOpacity, 1.0, CLAMP_GREATER)) {
+				SDK::SoundTool.Stop(SDK::CHANNEL.BGM);
+				SDK::Scene.SwitchMode(SDK::MODE.Credit);
+			}
+		}
+
 		if (!GameStartState) {
 			// 인트로 업데이트
 			UpdateIntroAnimation(FrameTime);
@@ -180,7 +192,7 @@ public:
 		else
 			TitleRect.Draw(0.0, 0.0, SDK::ASP(2.0), 2.0);
 
-		if (TutorialState)
+		if (TutorialState || CreditStartState)
 			TitleRect.Draw(0.0, 0.0, SDK::ASP(2.0), 2.0, 0.0, RectOpacity);
 	}
 
@@ -241,16 +253,17 @@ public:
 				ExitPageIndex += (int)Event.Key - (int)VK_RIGHT;
 				SDK::EXTool.ClampValue(ExitPageIndex, 0, 1, CLAMP_RETURN);
 				ExitPageFocused[ExitPageIndex] = true;
+
+				SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 			}
 
-			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
 
 		else if (Event.Key == VK_RETURN) {
 			switch (MenuPage) {
 			case MainPage:
 				TitleActivateState = true;
-				return;
+				break;
 
 			case ExitPage:
 				if (ExitPageFocused[0])
@@ -419,6 +432,10 @@ public:
 				Exit();  break;
 			case 4:
 				MenuPage = ResetPage;  break;
+			case 5:
+				CreditStartState = true;
+				SDK::Scene.DeleteInputObject(this);
+				break;
 			}
 
 			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);

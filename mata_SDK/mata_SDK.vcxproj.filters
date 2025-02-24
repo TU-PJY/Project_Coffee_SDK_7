@@ -184,6 +184,9 @@
     <Filter Include="[2]___________[ Object ]\[ Pause Mode ]">
       <UniqueIdentifier>{e69a0a87-db8a-471a-9612-af973c9451d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="[2]___________[ Object ]\[ Credit Mode ]">
+      <UniqueIdentifier>{d3d47824-5af6-4f62-9862-1fe914a7c35a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Library\tinyxml\tinystr.cpp">
@@ -532,6 +535,12 @@
     </ClInclude>
     <ClInclude Include="Tutorial.h">
       <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditScreen.h">
+      <Filter>[2]___________[ Object ]\[ Credit Mode ]</Filter>
+    </ClInclude>
+    <ClInclude Include="CreditMode.h">
+      <Filter>[1]___________[ GameMode ]\[1]_[ Modes ]</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

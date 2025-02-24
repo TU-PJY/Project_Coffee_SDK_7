@@ -1,26 +1,19 @@
 #pragma once
 #include <SDK_ModeHeader.h>
+#include "CreditScreen.h"
+#include "Cover.h"
 
-#include "Pillar.h"
-#include "BackgroundShelf.h"
-#include "TitleScreen.h"
-#include "Shelf.h"
-
-class TitleMode {
+class CreditMode {
 public:
-	// define mode name and mode type here
-	std::string ModeName { "TitleMode" };
-	int         ModeType { MODE_TYPE_DEFAULT };
+	std::string ModeName{ "CreditMode" };
+	int         ModeType{ MODE_TYPE_DEFAULT };
+
+	/////////////////////////////////////////////////////////////
 
 	static void Start() {
 		SetUp();
-		SDK::System.SetBackColorRGB(122, 138, 154);
-
-		SDK::Scene.AddObject(new Pillar(1.0), "pillar", LAYER_BG);
-		SDK::Scene.AddObject(new BackgroundShelf(SDK::ASP(-1.0)), "background_shelf", LAYER1);
-		SDK::Scene.AddObject(new Shelf(2, 1.75, true), "shelf", LAYER2);
-		SDK::Scene.AddObject(new TitleScreen(SDK::GLOBAL.TitleIntroPlayed), "title_screen", LAYER2, true);
-		SDK::GLOBAL.TitleIntroPlayed = true;
+		SDK::Scene.AddObject(new CreditScreen, "credit_screen", LAYER1, true);
+		SDK::Scene.AddObject(new DisappearCover, "dis_cover", LAYER7);
 	}
 
 	static void Destructor() {
@@ -29,9 +22,9 @@ public:
 	/////////////////////////////////////////////////////////////
 #pragma region FoldRegion 
 	std::vector<SDK::Object*> InputObject{};
-	inline static TitleMode* M_Inst;
+	inline static CreditMode* M_Inst;
 
-	TitleMode() { M_Inst = this; }
+	CreditMode() { M_Inst = this; }
 
 	static void Map(SDK::MODE_PTR& Mode) {
 		Mode = Start;
