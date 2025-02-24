@@ -1,6 +1,8 @@
 #pragma once
 #include <SDK_Scene.h>
 
+#include "Tutorial.h"
+
 enum MenuPageEnum {
 	ExitPage,
 	MainPage,
@@ -18,6 +20,10 @@ private:
 	bool GameStartState{};
 	// 인트로 시작 여부
 	bool IntroStartState{};
+	// 튜토리얼 렌더링 여부
+	bool TutorialState{};
+	// 튜토리얼 객체 추가 여부
+	bool TutorialAdded{};
 
 	// 타이틀 이미지 위치
 	SDK::Vector2 TitleImagePosition{};
@@ -88,6 +94,9 @@ private:
 	// 텍스트 배경
 	SDK::RectBrush TitleRect{};
 
+	// 튜토리얼 전환 시 사용하는 불투명도
+	float RectOpacity{};
+
 
 	// 게임 시작 타이머
 	SDK::Timer StartTimer{};
@@ -134,6 +143,14 @@ public:
 	}
 
 	void UpdateFunc(float FrameTime) {
+		if (TutorialState) {
+			RectOpacity += 4.0 * FrameTime;
+			if (!TutorialAdded && SDK::EXTool.CheckClampValue(RectOpacity, 1.0, CLAMP_GREATER)) {
+				SDK::Scene.AddObject(new Tutorial, "tutorial", LAYER7);
+				TutorialAdded = true;
+			}
+		}
+
 		if (!GameStartState) {
 			// 인트로 업데이트
 			UpdateIntroAnimation(FrameTime);
@@ -162,6 +179,9 @@ public:
 		}
 		else
 			TitleRect.Draw(0.0, 0.0, SDK::ASP(2.0), 2.0);
+
+		if (TutorialState)
+			TitleRect.Draw(0.0, 0.0, SDK::ASP(2.0), 2.0, 0.0, RectOpacity);
 	}
 
 	// 타이틀 화면 세팅
@@ -295,7 +315,7 @@ public:
 
 	// 메인 페이지 메뉴 입력
 	void InputMainPage(SDK::KeyEvent& Event) {
-		if (Event.Key == VK_UP || Event.Key == VK_DOWN) {
+		if (!TutorialState && (Event.Key == VK_UP || Event.Key == VK_DOWN)) {
 			// 방향키 위를 누르면 감소, 아래를 누르면 증가
 			MainPageFocused[MainPageIndex] = false;
 			MainPageIndex += (int)Event.Key - (int)VK_RIGHT;
@@ -306,25 +326,47 @@ public:
 		}
 
 		else if (Event.Key == VK_RETURN) {
-			switch (MainPageIndex) {
-				// 컨트롤러를 해제하고 게임 시작 상태를 활성화 한다
-			case 0: 
-				GameStartState = true; 
-				SDK::Scene.DeleteInputObject(this);
-				break;
-			case 1: MenuPage = OptionPage;  break;
-			case 2: MenuPage = ExitPage;  break;
+			if (!TutorialState) {
+				switch (MainPageIndex) {
+					// 컨트롤러를 해제하고 게임 시작 상태를 활성화 한다
+				case 0:
+					if (!SDK::GLOBAL.NeedTutorial) {
+						GameStartState = true;
+						SDK::Scene.DeleteInputObject(this);
+					}
+
+					// 튜토리얼이 필요할 경우 게임을 시작하기 전에 튜토리얼을 보여준다
+					else 
+						TutorialState = true;
+					break;
+				case 1: MenuPage = OptionPage;  break;
+				case 2: MenuPage = ExitPage;  break;
+				}
+
+				if (MainPageIndex != 0)
+					SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
+				else {
+					if (!TutorialState) {
+						SDK::SoundTool.Play(SDK::SOUND.CartCrash, SDK::CHANNEL.SFX);
+						SDK::SoundTool.Stop(SDK::CHANNEL.BGM);
+					}
+					else
+						SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
+				}
 			}
 
-			if(MainPageIndex != 0)
-				SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
+			// 튜토리얼 화면에서 한 번더 엔터를 누르면 게임을 시작한다
 			else {
+				GameStartState = true;
+				if (auto Tutorial = SDK::Scene.Find("tutorial"); Tutorial)
+					Tutorial->DisableRenderState();
+
 				SDK::SoundTool.Play(SDK::SOUND.CartCrash, SDK::CHANNEL.SFX);
 				SDK::SoundTool.Stop(SDK::CHANNEL.BGM);
 			}
 		}
 
-		else if (Event.Key == VK_ESCAPE) {
+		else if (!TutorialState && Event.Key == VK_ESCAPE) {
 			MenuPage = ExitPage;
 			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);
 		}
@@ -407,8 +449,14 @@ public:
 		}
 
 		else if (Event.Key == VK_RETURN) {
-			if (ResetPageIndex == 1) 
+			if (ResetPageIndex == 1) {
 				SDK::FILE.HighscoreData.ResetData();
+				SDK::GLOBAL.NeedTutorial = true;
+				SDK::GLOBAL.IsHighScore = false;
+				SDK::GLOBAL.IsHighRep = false;
+				SDK::GLOBAL.MaxRep = 0;
+				SDK::GLOBAL.HighScore = 0;
+			}
 			Exit();
 
 			SDK::SoundTool.Play(SDK::SOUND.MenuSelect, SDK::CHANNEL.SFX);

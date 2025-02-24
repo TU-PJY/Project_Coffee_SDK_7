@@ -95,6 +95,9 @@ namespace SDK {
 		// cover functions
 		virtual bool GetState() { return{}; }
 
+		// tutorial functions
+		virtual void DisableRenderState() {}
+
 	private:
 		glm::vec4 ViewportPosition();
 		glm::vec4 LocalPosition();

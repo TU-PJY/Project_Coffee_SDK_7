@@ -530,6 +530,9 @@
     <ClInclude Include="PauseMode.h">
       <Filter>[1]___________[ GameMode ]\[1]_[ Modes ]</Filter>
     </ClInclude>
+    <ClInclude Include="Tutorial.h">
+      <Filter>[2]___________[ Object ]\[ PlayMode ]</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ModeTemplate.txt">

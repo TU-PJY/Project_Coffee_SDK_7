@@ -256,6 +256,7 @@
     <ClInclude Include="Src\SDK_UtilPack.h" />
     <ClInclude Include="Src\SDK_ModeResource.h" />
     <ClInclude Include="TitleScreen.h" />
+    <ClInclude Include="Tutorial.h" />
     <ClInclude Include="Xion.h" />
   </ItemGroup>
   <ItemGroup>
