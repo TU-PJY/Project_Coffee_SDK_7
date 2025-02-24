@@ -14,11 +14,18 @@ private:
 	float EDCameraPosition{};
 	float EDCameraHeight{};
 
+	// 인트로 카메라 위치
+	SDK::Vector2 EDIntroCameraPosition{-1.95, 0.4};
+	float EDIntroCameraZoom{1.0};
+
+	SDK::SinMove IntroPositionMove{};
+	SDK::SinMove IntroZoomMove{};
+
 	// 카메라 줌 
 	float EDCameraZoom{1.0};
 
 	// 카메라 오프셋
-	float CameraOffset{ 0.9 };
+	float CameraOffset{ 0.95 };
 
 	// 각 상태마다 다른 프레임을 출력한다
 	int Frame = ED_Idle;
@@ -89,8 +96,11 @@ private:
 public:
 	ED() {
 		EDCameraPosition = DestPosition + CameraOffset;
-		SDK::CameraControl.Move(EDCameraPosition, 0.0);
-		SDK::CameraControl.SetZoom(1.0);
+		SDK::CameraControl.Move(EDCameraPosition + EDIntroCameraPosition.x, EDIntroCameraPosition.y);
+		SDK::CameraControl.SetZoom(EDCameraZoom + EDIntroCameraZoom);
+
+		IntroPositionMove.SetMovePoint(EDIntroCameraPosition, SDK::Vector2(0.0, 0.0));
+		IntroZoomMove.SetMovePoint(EDIntroCameraZoom, 0.0);
 
 		SDK::SoundTool.SetVolume(SndChannel, SDK::GLOBAL.SFXVolume);
 		SDK::SoundTool.SetVolume(SndChannel2, SDK::GLOBAL.SFXVolume);
@@ -322,11 +332,16 @@ public:
 		// 목표 위치로 이동하도록 한다
 		SDK::Math.Lerp(Position, DestPosition, 20.0, FrameTime);
 
+		// 게임 시작 시 인트로 연출
+		IntroPositionMove.Update(EDIntroCameraPosition, 1.2, FrameTime);
+		IntroZoomMove.Update(EDIntroCameraZoom, 1.2, FrameTime);
+
 		// 카메라가 이드를 부드럽게 따라오도록 한다
 		SDK::Math.Lerp(EDCameraPosition, DestPosition + CameraOffset, 7.0, FrameTime);
 
 		// 이드를 약간 오른쪽에서 바라보도록 한다
-		SDK::CameraControl.Move(EDCameraPosition + PushCameraOffset, 0.0);
+		SDK::CameraControl.Move(EDCameraPosition + PushCameraOffset + EDIntroCameraPosition.x, EDIntroCameraPosition.y);
+		SDK::CameraControl.SetZoom(1.0 + EDIntroCameraZoom);
 	}
 
 	void UpdateGameOverAnimation(float FrameTime) {
