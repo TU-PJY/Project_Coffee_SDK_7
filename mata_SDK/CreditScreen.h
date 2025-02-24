@@ -58,6 +58,11 @@ private:
 
 	SDK::Timer XionTimer{};
 
+	SDK::Vector2 NataPosition{0.0, 0.8};
+	float NataHeight{};
+	SDK::SinLoop NataLoop{};
+	int NataLookDir = 1; // 1: right, -1: left
+
 	SDK::Text Text{};
 
 	std::vector<std::wstring> CreditStr = {
@@ -124,11 +129,17 @@ public:
 		EDLoop.Update(EDSize, 0.005, 4.0, FrameTime);
 		XionLoop.Update(XionSize, 0.03, 1.0, FrameTime);
 		LightLoop.Update(LightOpacity, 0.2, 20.0, FrameTime);
+		NataLoop.Update(NataHeight, 0.05, 2.0, FrameTime);
+
+		// 나타가 좌우로 이동한다
+		NataPosition.x += 0.4 * (float)NataLookDir * FrameTime;
+		// 한 쪽 끝으로 가면 이동 방향을 반대로 바꾼다
+		if (NataPosition.x < SDK::ASP(-2.0) || NataPosition.x > SDK::ASP(2.0))
+			NataLookDir *= -1;
 
 		XionTimer.Update(FrameTime);
-		if (XionTimer.CheckMiliSec(0.6, 1, CHECK_AND_INTERPOLATE))
+		if (XionTimer.CheckMiliSec(0.8, 1, CHECK_AND_INTERPOLATE))
 			SDK::Scene.AddObject(new ZZZ(SDK::Vector2(XionPosition + 0.3, 0.5)), "zzz", LAYER2);
-
 		
 		if (!EDExitState) {
 			EDTimer.Update(FrameTime);
@@ -217,6 +228,24 @@ public:
 			SDK::Transform.Scale(SDK::MoveMatrix, SDK::ASP(2.0) / SDK::Camera.Zoom, 2.0);
 			SDK::ImageTool.SetColorRGB(67, 76, 99);
 			SDK::ImageTool.RenderImage(SDK::SYSRES.COLOR_TEXTURE);
+
+			// 생명장치
+			Begin();
+			SDK::Transform.Move(SDK::MoveMatrix, -2.0, 0.3);
+			SDK::Transform.Scale(SDK::MoveMatrix, 2.2, 2.2);
+			SDK::ImageTool.RenderImage(SDK::IMAGE.Machine);
+
+			// 나타
+			Begin();
+			SDK::Transform.Move(SDK::MoveMatrix, NataPosition.x, NataPosition.y + NataHeight);
+			if (NataLookDir == -1) {
+				SDK::Transform.Flip(FLIP_TYPE_H);
+				SDK::Transform.Rotate(SDK::MoveMatrix, -15.0);
+			}
+			else
+				SDK::Transform.Rotate(SDK::MoveMatrix, 15.0);
+			SDK::Transform.Scale(SDK::MoveMatrix, 1.0, 1.0 + NataHeight);
+			SDK::ImageTool.RenderImage(SDK::IMAGE.Nata);
 
 			// 소파 뒷 부분
 			Begin();
