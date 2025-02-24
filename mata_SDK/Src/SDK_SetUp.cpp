@@ -36,6 +36,8 @@ SDK::START_MODE_PTR SDK::START_MODE;
 
 HWND SDK::SystemHWND;
 
+bool SDK::ClippingState;
+
 int MajorVersion, MinorVersion;
 
 void SDK::SDK_System::SetupSystem(int argc, char** argv) {

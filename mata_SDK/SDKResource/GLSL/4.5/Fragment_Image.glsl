@@ -15,6 +15,8 @@ uniform int       BlurExecution;
 uniform float     BlurStrength; 
 uniform vec2      TextureSize;
 
+uniform bool      ClippingState;
+
 vec4 ComputeBlur() {
     vec4 ReturnColor = vec4(0.0);
     float TotalWeight = 0.0;
@@ -44,7 +46,7 @@ void main() {
     else
         FinalResult = texture(OutTexture, TextureCoord);
 
-    if (FinalResult.a < 0.001) 
+    if (ClippingState && FinalResult.a < 0.001) 
         discard;
 
     FragColor = vec4(FinalResult.rgb + Color.rgb, FinalResult.a * Opacity);

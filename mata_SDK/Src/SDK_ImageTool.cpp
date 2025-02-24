@@ -466,6 +466,8 @@ void SDK::SDK_ImageTool::PrepareRender(SDK::Image& ImageStruct) {
 	else
 		glUniform1i(BLUR_STATE_LOCATION, false);
 
+	glUniform1i(CLIPPING_STATE_LOCATION, ClippingState);
+
 	glUniformMatrix4fv(IMAGE_MODEL_LOCATION, 1, GL_FALSE, glm::value_ptr(ResultMatrix));
 }
 
@@ -484,6 +486,8 @@ void SDK::SDK_ImageTool::PrepareRender(SDK::SpriteSheet& SpriteSheetStruct) {
 	}
 	else
 		glUniform1i(BLUR_STATE_LOCATION, false);
+
+	glUniform1i(CLIPPING_STATE_LOCATION, ClippingState);
 
 	glUniformMatrix4fv(IMAGE_MODEL_LOCATION, 1, GL_FALSE, glm::value_ptr(ResultMatrix));
 }
