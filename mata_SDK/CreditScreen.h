@@ -58,7 +58,7 @@ private:
 
 	SDK::Timer XionTimer{};
 
-	SDK::Vector2 NataPosition{0.0, 0.8};
+	SDK::Vector2 NataPosition{SDK::ASP(-1.0), 0.8};
 	float NataHeight{};
 	SDK::SinLoop NataLoop{};
 	int NataLookDir = 1; // 1: right, -1: left
@@ -137,9 +137,11 @@ public:
 		if (NataPosition.x < SDK::ASP(-2.0) || NataPosition.x > SDK::ASP(2.0))
 			NataLookDir *= -1;
 
-		XionTimer.Update(FrameTime);
-		if (XionTimer.CheckMiliSec(0.8, 1, CHECK_AND_INTERPOLATE))
-			SDK::Scene.AddObject(new ZZZ(SDK::Vector2(XionPosition + 0.3, 0.5)), "zzz", LAYER2);
+		if (!EDExitState) {
+			XionTimer.Update(FrameTime);
+			if (XionTimer.CheckMiliSec(0.8, 1, CHECK_AND_INTERPOLATE))
+				SDK::Scene.AddObject(new ZZZ(SDK::Vector2(XionPosition + 0.3, 0.5)), "zzz", LAYER2);
+		}
 		
 		if (!EDExitState) {
 			EDTimer.Update(FrameTime);
@@ -233,6 +235,7 @@ public:
 			Begin();
 			SDK::Transform.Move(SDK::MoveMatrix, -2.0, 0.2);
 			SDK::Transform.Scale(SDK::MoveMatrix, 2.1, 2.1);
+			SDK::Transform.Flip(FLIP_TYPE_H);
 			SDK::ImageTool.RenderImage(SDK::IMAGE.Machine);
 
 			// ³ªÅ¸
