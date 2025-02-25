@@ -1,5 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "SDK_Resource.h"
-
 
 // Use LoadImageT(), LoadClipT(), and LoadSpriteSheetT() to load image files and sprite sheets in this thread.
 DWORD WINAPI ImageResourceLoader(LPVOID lpParam) {
@@ -134,8 +134,10 @@ DWORD WINAPI SoundResourceLoader(LPVOID lpParam) {
 }
 
 DWORD WINAPI FileResourceLoader(LPVOID lpParam) {
-	SDK::FILE.HighscoreData.Load("GameData//HighScore", SDK::FORMAT.HighScore);
-	SDK::FILE.UserSettingData.Load("GameData//UserSettings", SDK::FORMAT.UserSettings);
+	std::filesystem::path FolderPath = std::filesystem::path(std::getenv("USERPROFILE")) / "Eld Mart Slam";
+
+	SDK::FILE.HighscoreData.Load(FolderPath.string() + "//HighScore", SDK::FORMAT.HighScore);
+	SDK::FILE.UserSettingData.Load(FolderPath.string() + "//UserSettings", SDK::FORMAT.UserSettings);
 
 	SDK::GLOBAL.FullscreenAcvivated = SDK::FILE.UserSettingData.LoadDigitData("Setting", "Fullscreen");
 	SDK::GLOBAL.BGMVolume = SDK::FILE.UserSettingData.LoadDigitData("Setting", "BGMVolume");
@@ -144,9 +146,7 @@ DWORD WINAPI FileResourceLoader(LPVOID lpParam) {
 	SDK::GLOBAL.HighScore = SDK::FILE.HighscoreData.LoadDigitData("HighScore", "Score");
 	SDK::GLOBAL.MaxRep = SDK::FILE.HighscoreData.LoadDigitData("HighScore", "Rep");
 	SDK::GLOBAL.NeedTutorial = SDK::FILE.HighscoreData.LoadDigitData("TutorialNeed", "Bool");
-
-	SDK::SoundTool.SetVolume(SDK::CHANNEL.SFX, SDK::GLOBAL.SFXVolume);
-
+	
 	return 0;
 }
 
