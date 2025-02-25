@@ -81,6 +81,17 @@ public:
 
 	void RenderFunc() {
 		Begin(RENDER_TYPE_STATIC);
+		SDK::Transform.Move(SDK::MoveMatrix, SDK::ASP(1.0) - 0.1, 0.0);
+		SDK::Transform.Rotate(SDK::MoveMatrix, -90.0);
+		SDK::Transform.Scale(SDK::MoveMatrix, 2.0, 2.0);
+		SDK::ImageTool.RenderImage(SDK::IMAGE.LoadingED);
+
+		Begin(RENDER_TYPE_STATIC);
+		SDK::Transform.Move(SDK::MoveMatrix, SDK::ASP(-1.0) + 0.75, 0.0);
+		SDK::Transform.Scale(SDK::MoveMatrix, 1.5, 1.5);
+		SDK::ImageTool.RenderImage(SDK::IMAGE.Title);
+
+		Begin(RENDER_TYPE_STATIC);
 		SDK::Transform.Scale(SDK::MoveMatrix, 0.6, 0.6);
 		SDK::ImageTool.SetColor(1.0, 1.0, 1.0);
 		SDK::ImageTool.RenderImage(SDK::SYSRES.MATA_LOGO, SpinnerOpacity);

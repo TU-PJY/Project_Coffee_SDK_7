@@ -600,6 +600,7 @@ public:
 	// 텍스트 렌더링
 	void RenderText() {
 		TitleText.DisableShadow();
+
 		switch (MenuPage) {
 		case ExitPage: // 나가기 페이지 렌더링
 			RenderExitPage();  break;
@@ -653,6 +654,11 @@ public:
 			TitleText.SetColorRGB(255, 213, 80);
 			TitleText.EnableShadow();
 			TitleText.Render(0.0, -0.7, 0.15 + StartTextSize, L"Enter를 눌러 시작!");
+
+			TitleText.SetAlign(ALIGN_DEFAULT);
+			TitleText.SetHeightAlign(HEIGHT_ALIGN_DEFAULT);
+			TitleText.SetColor(1.0, 1.0, 1.0);
+			TitleText.Render(SDK::ASP(-1.0) + 0.01, -1.0 + 0.05, 0.1, L"Version %.1f", APPLICATION_VERSION);
 		}
 	}
 
