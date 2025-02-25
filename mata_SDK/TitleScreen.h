@@ -61,6 +61,11 @@ private:
 	// 텍스트 렌더링 여부
 	bool TitleTextRenderState{};
 
+	// 타이틀 시작 텍스트 크기
+	float StartTextSize{};
+	// 타이틀 시작 텍스트 크기 루프
+	SDK::SinLoop StartTextSizeLoop{};
+
 	// 텍스트 목록
 	std::wstring MenuItem[3] = {
 		L"시작!",
@@ -408,6 +413,7 @@ public:
 			case 1:
 				SDK::EXTool.SwitchBool(SDK::GLOBAL.FullscreenAcvivated);
 				SDK::FILE.UserSettingData.UpdateDigitData("Setting", "Fullscreen", (int)SDK::GLOBAL.FullscreenAcvivated);
+				SDK::System.SwitchScreenState();
 				break;
 			case 2:
 				SDK::GLOBAL.BGMVolume += (float)((int)Event.Key - (int)VK_UP) * 0.1;
@@ -514,6 +520,8 @@ public:
 	void UpdateUI(float FrameTime) {
 		if (TitleTextRenderState)
 			SDK::Math.Lerp(TitleTextHorizontalOffset, 0.0, 5.0, FrameTime);
+		else
+			StartTextSizeLoop.Update(StartTextSize, 0.02, 5.0, FrameTime);
 	}
 
 	// 카메라 업데이트
@@ -591,6 +599,7 @@ public:
 
 	// 텍스트 렌더링
 	void RenderText() {
+		TitleText.DisableShadow();
 		switch (MenuPage) {
 		case ExitPage: // 나가기 페이지 렌더링
 			RenderExitPage();  break;
@@ -605,38 +614,46 @@ public:
 
 	//메인 페이지 렌더링
 	void RenderMainPage() {
-		// 배경
-		TitleRect.Draw(SDK::ASP(1.0) + TitleTextHorizontalOffset, 0.0, 1.8, 2.0, 0.0, 0.5);
+		if (TitleActivateState) {
+			// 배경
+			TitleRect.Draw(SDK::ASP(1.0) + TitleTextHorizontalOffset, 0.0, 1.8, 2.0, 0.0, 0.5);
 
-		// 좌측 정렬, 가운데 높이 정렬로 변경
-		TitleText.SetAlign(ALIGN_LEFT);
-		TitleText.SetHeightAlign(HEIGHT_ALIGN_MIDDLE);
+			// 좌측 정렬, 가운데 높이 정렬로 변경
+			TitleText.SetAlign(ALIGN_LEFT);
+			TitleText.SetHeightAlign(HEIGHT_ALIGN_MIDDLE);
 
-		// 텍스트 가로 위치
-		float TextHorizontalPositon = SDK::ASP(1.0) - 0.1 + TitleTextHorizontalOffset;
+			// 텍스트 가로 위치
+			float TextHorizontalPositon = SDK::ASP(1.0) - 0.1 + TitleTextHorizontalOffset;
 
-		// 메뉴 항목 렌더링
-		for (int i = 0; i < 3; i++) {
-			if (MainPageFocused[i])  TitleText.SetColorRGB(255, 213, 80);
-			else				     TitleText.SetColor(1.0, 1.0, 1.0);
-			TitleText.Render(TextHorizontalPositon, 0.25 - 0.25 * i, 0.1, MenuItem[i].c_str());
+			// 메뉴 항목 렌더링
+			for (int i = 0; i < 3; i++) {
+				if (MainPageFocused[i])  TitleText.SetColorRGB(255, 213, 80);
+				else				     TitleText.SetColor(1.0, 1.0, 1.0);
+				TitleText.Render(TextHorizontalPositon, 0.25 - 0.25 * i, 0.1, MenuItem[i].c_str());
+			}
+
+			// 최고 점수 렌더링, 갱신 시 초록색으로 하이라이트
+			if (SDK::GLOBAL.IsHighScore)  TitleText.SetColor(0.0, 1.0, 0.0);
+			else						  TitleText.SetColor(1.0, 1.0, 1.0);
+			if (SDK::GLOBAL.HighScore > 0)
+				TitleText.Render(TextHorizontalPositon, 0.85, 0.08, L"최고 점수\n%d", SDK::GLOBAL.HighScore);
+			else
+				TitleText.Render(TextHorizontalPositon, 0.85, 0.08, L"최고 점수\n-", SDK::GLOBAL.HighScore);
+
+			// 최고 금액 렌더링, 갱신 시 초록색으로 하이라이트
+			if (SDK::GLOBAL.IsHighRep)  TitleText.SetColor(0.0, 1.0, 0.0);
+			else						TitleText.SetColor(1.0, 1.0, 1.0);
+			if (SDK::GLOBAL.MaxRep > 0)
+				TitleText.Render(TextHorizontalPositon, 0.6, 0.08, L"최고 금액\n%d 골드", SDK::GLOBAL.MaxRep);
+			else
+				TitleText.Render(TextHorizontalPositon, 0.6, 0.08, L"최고 금액\n- 골드", SDK::GLOBAL.MaxRep);
 		}
-
-		// 최고 점수 렌더링, 갱신 시 초록색으로 하이라이트
-		if (SDK::GLOBAL.IsHighScore)  TitleText.SetColor(0.0, 1.0, 0.0);
-		else						  TitleText.SetColor(1.0, 1.0, 1.0);
-		if (SDK::GLOBAL.HighScore > 0)
-			TitleText.Render(TextHorizontalPositon, 0.85, 0.08, L"최고 점수\n%d", SDK::GLOBAL.HighScore);
-		else
-			TitleText.Render(TextHorizontalPositon, 0.85, 0.08, L"최고 점수\n-", SDK::GLOBAL.HighScore);
-
-		// 최고 금액 렌더링, 갱신 시 초록색으로 하이라이트
-		if (SDK::GLOBAL.IsHighRep)  TitleText.SetColor(0.0, 1.0, 0.0);
-		else						TitleText.SetColor(1.0, 1.0, 1.0);
-		if (SDK::GLOBAL.MaxRep > 0)
-			TitleText.Render(TextHorizontalPositon, 0.6, 0.08, L"최고 금액\n%d 골드", SDK::GLOBAL.MaxRep);
-		else
-			TitleText.Render(TextHorizontalPositon, 0.6, 0.08, L"최고 금액\n- 골드", SDK::GLOBAL.MaxRep);
+		else {
+			TitleText.SetAlign(ALIGN_MIDDLE);
+			TitleText.SetColorRGB(255, 213, 80);
+			TitleText.EnableShadow();
+			TitleText.Render(0.0, -0.7, 0.15 + StartTextSize, L"Enter를 눌러 시작!");
+		}
 	}
 
 	// 옵션 페이지 렌더링

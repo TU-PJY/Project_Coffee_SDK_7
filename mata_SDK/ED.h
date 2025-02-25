@@ -188,8 +188,8 @@ public:
 			if (Item.Type == Coffee_Can || Coffee_Bottle)
 				TotalBreakCount++;
 
-			// 30개를 부술 때마다 커피 얼룩 레벨이 증가한다
-			if (TotalBreakCount >= 30) {
+			// 50개를 부술 때마다 커피 얼룩 레벨이 증가한다
+			if (TotalBreakCount >= 50) {
 				CoffeeStatinLevel++;
 				SDK::EXTool.ClampValue(CoffeeStatinLevel, 5, CLAMP_GREATER);
 				TotalBreakCount = 0;
@@ -268,7 +268,7 @@ public:
 				Xion->PushPeople();
 
 				if (auto Score = SDK::Scene.Find("score_indicator"); Score)
-					Score->AddScore(100);
+					Score->AddScore(150);
 
 				Frame = ED_HitHigh2;
 			}

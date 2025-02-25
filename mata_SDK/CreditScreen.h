@@ -231,13 +231,6 @@ public:
 			SDK::ImageTool.SetColorRGB(67, 76, 99);
 			SDK::ImageTool.RenderImage(SDK::SYSRES.COLOR_TEXTURE);
 
-			// 생명장치
-			Begin();
-			SDK::Transform.Move(SDK::MoveMatrix, -2.0, 0.2);
-			SDK::Transform.Scale(SDK::MoveMatrix, 2.1, 2.1);
-			SDK::Transform.Flip(FLIP_TYPE_H);
-			SDK::ImageTool.RenderImage(SDK::IMAGE.Machine);
-
 			// 나타
 			Begin();
 			SDK::Transform.Move(SDK::MoveMatrix, NataPosition.x, NataPosition.y + NataHeight);
@@ -250,7 +243,30 @@ public:
 			SDK::Transform.Scale(SDK::MoveMatrix, 1.0, 1.0 + NataHeight);
 			SDK::ImageTool.RenderImage(SDK::IMAGE.Nata);
 
+			Begin();
+			SDK::Transform.Move(SDK::MoveMatrix, NataPosition.x, -0.55);
+			SDK::Transform.Scale(SDK::MoveMatrix, 0.7, 0.7);
+			SDK::ImageTool.RenderImage(SDK::IMAGE.Shadow);
+
+
+			// 생명장치
+			Begin();
+			SDK::Transform.Move(SDK::MoveMatrix, -2.0, -0.6);
+			SDK::Transform.Scale(SDK::MoveMatrix, 1.8, 1.5);
+			SDK::ImageTool.RenderImage(SDK::IMAGE.Shadow);
+
+			Begin();
+			SDK::Transform.Move(SDK::MoveMatrix, -2.0, 0.2);
+			SDK::Transform.Scale(SDK::MoveMatrix, 2.1, 2.1);
+			SDK::Transform.Flip(FLIP_TYPE_H);
+			SDK::ImageTool.RenderImage(SDK::IMAGE.Machine);
+
 			// 소파 뒷 부분
+			Begin();
+			SDK::Transform.Move(SDK::MoveMatrix, 1.3, -0.64);
+			SDK::Transform.Scale(SDK::MoveMatrix, 0.5, 0.3);
+			SDK::ImageTool.RenderImage(SDK::IMAGE.Shadow);
+
 			Begin();
 			SDK::Transform.Scale(SDK::MoveMatrix, 4.0, 4.0);
 			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.Sofa, 0);
@@ -303,8 +319,12 @@ public:
 
 			// 의자
 			Begin();
-			SDK::Transform.Move(SDK::MoveMatrix, XionPosition, 0.0);
-			SDK::Transform.Scale(SDK::MoveMatrix, 2.0, 2.0);
+			SDK::Transform.Move(SDK::MoveMatrix, XionPosition + 0.18, -0.7);
+			SDK::Transform.Scale(SDK::MoveMatrix, 0.5, 0.5);
+			SDK::ImageTool.RenderImage(SDK::IMAGE.Shadow);
+			Begin();
+			SDK::Transform.Move(SDK::MoveMatrix, XionPosition, 0.05);
+			SDK::Transform.Scale(SDK::MoveMatrix, 2.0, 2.2);
 			SDK::ImageTool.RenderImage(SDK::IMAGE.Chair);
 
 			// 이드 다리

@@ -22,5 +22,5 @@ void ModeAttribute() {
 	Credit.Map(SDK::MODE.Credit);
 
 	// Set start mode
-	SDK::START_MODE = SDK::MODE.Credit;
+	SDK::START_MODE = SDK::MODE.Title;
 }

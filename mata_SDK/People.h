@@ -244,6 +244,7 @@ public:
 			SDK::Transform.Move(SDK::MoveMatrix, CartPosition.x, CartPosition.y);
 			SDK::Transform.Rotate(SDK::MoveMatrix, CartRotation);
 			SDK::Transform.Scale(SDK::MoveMatrix, 1.5, 1.5);
+			SDK::ImageTool.RenderImage(SDK::IMAGE.CartShadow);
 			SDK::ImageTool.RenderStaticSpriteSheet(SDK::IMAGE.Cart, 0);
 		}
 	}

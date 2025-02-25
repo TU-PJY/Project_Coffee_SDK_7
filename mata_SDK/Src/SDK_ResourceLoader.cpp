@@ -18,7 +18,8 @@ DWORD WINAPI ImageResourceLoader(LPVOID lpParam) {
 	SDK::ImageTool.LoadSpriteSheetT(SDK::IMAGE.People, "Assets//Sprite//People//sheet-people.png");
 	SDK::ImageTool.LoadSpriteSheetT(SDK::IMAGE.PeopleBack, "Assets//Sprite//People//sheet-people-back.png");
 
-	SDK::ImageTool.LoadImageT(SDK::IMAGE.Shadow, "Assets//Sprite//People//shadow.png");
+	SDK::ImageTool.LoadImageT(SDK::IMAGE.Shadow, "Assets//Sprite//Object//shadow.png");
+	SDK::ImageTool.LoadImageT(SDK::IMAGE.CartShadow, "Assets//Sprite//Object//shadow-cart.png");
 
 	SDK::ImageTool.SetSpriteSheetSize(256, 256, 4, 1);
 	SDK::ImageTool.LoadSpriteSheetT(SDK::IMAGE.CreditED, "Assets//Sprite//People//sheet-ed-credit.png");
