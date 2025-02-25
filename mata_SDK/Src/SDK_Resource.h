@@ -104,13 +104,16 @@ namespace SDK {
 	// Write your data format here.
 	// {  Data Type, Category Name, Data Name, Digit Value, String Value }
 	struct SDK_FORMAT_RESOURCE {
+
 		DataFormat HighScore = {
-		{DATA_TYPE_DIGIT, "HighScore", "Score", 0, ""},
-		{DATA_TYPE_DIGIT, "HighScore", "Rep", 0, ""},
-		{DATA_TYPE_DIGIT, "TutorialNeed", "Bool", 1, ""}
+			// version 1.1
+			{DATA_TYPE_DIGIT, "HighScore", "Score", 0, ""},
+			{DATA_TYPE_DIGIT, "HighScore", "Rep", 0, ""},
+			{DATA_TYPE_DIGIT, "TutorialNeed", "Bool", 1, ""}
 		};
 
 		DataFormat UserSettings = {
+			// version 1.1
 			{DATA_TYPE_DIGIT, "Setting", "Fullscreen", 1, ""},
 			{DATA_TYPE_DIGIT, "Setting", "BGMVolume", 1.0, ""},
 			{DATA_TYPE_DIGIT, "Setting", "SFXVolume", 1.0, ""}

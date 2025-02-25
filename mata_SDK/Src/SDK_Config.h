@@ -19,7 +19,7 @@ constexpr bool DISABLE_ALT_EVENT = true;
 
 //////////////////////////////////// SDK options
 // intro screen option
-constexpr bool ENABLE_INTRO_SCREEN = false;
+constexpr bool ENABLE_INTRO_SCREEN = true;
 
 // frame limits option
 // If this option is set to 0, the system will run at maximum framerate.
@@ -32,7 +32,7 @@ constexpr bool USE_COMPUTE_SHADER = false;
 
 //////////////////////////////////// Development options
 // console window option
-constexpr bool SHOW_CONSOLE = true;
+constexpr bool SHOW_CONSOLE = false;
 
 // FPS indicator option
 constexpr bool SHOW_FPS = false;
@@ -87,18 +87,18 @@ constexpr int BLUR_EXECUTION = 10;
 
 //////////////////////////////////// File security Options
 // Application version
-constexpr float APPLICATION_VERSION = 1.0;
+constexpr float APPLICATION_VERSION = 1.1;
 
 // Data file security option
 // When this option is activated, the data file is saved as an encrypted file.
 // When this option is disabled, the data file is saved as an xml file.
-constexpr bool USE_FILE_SECURITY = false;
+constexpr bool USE_FILE_SECURITY = true;
 
 // AES, IV for Data
 // Recommend that you make this part private or 
 // modify it with the default password before distributing
 constexpr unsigned char AES_KEY[16]
-{ "1234567890" };
+{ "34342185521" };
 
 constexpr unsigned char IV_KEY[16]
-{ "1234567890" };
+{ "34342185521" };

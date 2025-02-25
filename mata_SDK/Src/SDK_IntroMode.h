@@ -11,7 +11,13 @@ public:
 
 	static void Start() {
 		SetUp();
-		SDK::Scene.AddObject(new SDK_IntroScreen, "intro_screen", LAYER1, true, OBJECT_TYPE_STATIC);
+
+		if (SDK::GLOBAL.FullscreenAcvivated)
+			SDK::System.SwitchScreenState();
+		else
+			SDK::System.ChangeScreenSize(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN));
+
+		SDK::Scene.AddObject(new SDK_IntroScreen, "intro_screen", LAYER7, true, OBJECT_TYPE_STATIC);
 	}
 
 	static void Destructor() {

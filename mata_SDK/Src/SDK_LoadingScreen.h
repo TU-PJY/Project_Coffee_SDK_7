@@ -62,11 +62,6 @@ public:
 				}
 
 				else {
-					if (SDK::GLOBAL.FullscreenAcvivated)
-						SDK::System.SwitchScreenState();
-					else
-						SDK::System.ChangeScreenSize(GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN));
-
 					if(ENABLE_INTRO_SCREEN) {
 						SpinnerOpacity -= FrameTime * 2.0;
 						if (SDK::EXTool.CheckClampValue(SpinnerOpacity, 0.0, CLAMP_LESS)) {

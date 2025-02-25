@@ -11,8 +11,8 @@ public:
 
 	static void Start() {
 		SetUp();
-		SDK::System.SetBackColorRGB(31, 31, 31);
-		SDK::Scene.AddObject(new SDK_LoadingScreen, "loading_screen", LAYER1);
+		SDK::System.SetBackColorRGB(122, 138, 154);
+		SDK::Scene.AddObject(new SDK_LoadingScreen, "loading_screen", LAYER7);
 	}
 
 	static void Destructor() {

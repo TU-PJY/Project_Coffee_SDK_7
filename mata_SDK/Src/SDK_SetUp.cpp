@@ -65,6 +65,8 @@ void SDK::SDK_System::SetupWindow() {
 	glGetIntegerv(GL_MINOR_VERSION, &MinorVersion);
 	std::cout << "OpenGL Version: " << MajorVersion << "." << MinorVersion << std::endl;
 
+	HideCursor();
+
 	if (MajorVersion < 4 || (MajorVersion == 4 && MinorVersion < 3)) {
 		int Result = MessageBox(NULL, L"그래픽카드의 OpenGL 지원 버전이 너무 낮습니다. 최소 OpenGL 4.3 버전을 지원해야 합니다.", L"mata_SDK Error", MB_OK | MB_ICONINFORMATION);
 		if (Result == IDOK)
