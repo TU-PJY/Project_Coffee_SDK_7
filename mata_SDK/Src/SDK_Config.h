@@ -3,7 +3,7 @@
 
 //////////////////////////////////// Window options
 // window name
-constexpr const char* WINDOW_NAME = "mata_SDK 7";
+constexpr const char* WINDOW_NAME = "Eld Mart Slam";
 
 // window size
 constexpr int WINDOW_WIDTH = 1000;
