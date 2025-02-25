@@ -6,9 +6,11 @@
 #include "SDK_Config.h"
 #include "SDK_Resource.h"
 #include "SDK_ModeResource.h"
-#include <windows.h>
 
 #include "SDK_LoadingMode.h"
+
+#include <windows.h>
+#include <shellapi.h>
 
 int SDK::WIDTH = WINDOW_WIDTH;
 int SDK::HEIGHT = WINDOW_HEIGHT;
@@ -91,24 +93,32 @@ void SDK::SDK_System::SetupWindow() {
 	}
 
 	SDK::SystemHWND = FindWindowA(nullptr, WINDOW_NAME);
+
+	if (SDK::SystemHWND) {
+		HICON Icon[1]{};
+		if (ExtractIconEx(L"Assets\\Icon\\icon.ico", 0, &Icon[0], NULL, 1) > 0) {
+			SendMessage(SDK::SystemHWND, WM_SETICON, ICON_SMALL, (LPARAM)Icon[0]);
+			SendMessage(SDK::SystemHWND, WM_SETICON, ICON_BIG, (LPARAM)Icon[0]);
+		}
+	}
 }
 
 void SDK::SDK_System::LoadShader() {
 	std::string FolderName = "SDKResource//GLSL//" + std::to_string(MajorVersion) + "." + std::to_string(MinorVersion) + "//";
 
-	SDK::Shader.LoadVertexShader(std::string(FolderName + "Vertex.glsl"));
-	SDK::Shader.LoadFragmentShader(std::string(FolderName + "Fragment_Image.glsl"));
+	SDK::Shader.LoadVertexShader(FolderName + "Vertex.glsl");
+	SDK::Shader.LoadFragmentShader(FolderName + "Fragment_Image.glsl");
 	SDK::Shader.CreateShader(IMAGE_SHADER);
 
-	SDK::Shader.LoadVertexShader(std::string(FolderName + "Vertex.glsl"));
-	SDK::Shader.LoadFragmentShader(std::string(FolderName + "Fragment_Text.glsl"));
+	SDK::Shader.LoadVertexShader(FolderName + "Vertex.glsl");
+	SDK::Shader.LoadFragmentShader(FolderName + "Fragment_Text.glsl");
 	SDK::Shader.CreateShader(TEXT_SHADER);
 
-	SDK::Shader.LoadVertexShader(std::string(FolderName + "Vertex.glsl"));
-	SDK::Shader.LoadFragmentShader(std::string(FolderName + "Fragment_Shape.glsl"));
+	SDK::Shader.LoadVertexShader(FolderName + "Vertex.glsl");
+	SDK::Shader.LoadFragmentShader(FolderName + "Fragment_Shape.glsl");
 	SDK::Shader.CreateShader(SHAPE_SHADER);
 
-	SDK::Shader.LoadComputeShader(std::string(FolderName + "ComputeMatrix.glsl"));
+	SDK::Shader.LoadComputeShader(FolderName + "ComputeMatrix.glsl");
 	SDK::Shader.CreateComputeShader(MATRIX_COMPT_SHADER);
 
 	SDK::Shader.CreateShaderLocation();

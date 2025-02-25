@@ -74,6 +74,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>Src\Library\FMOD\api\core\inc;Src\Library\OpenGL\freeglut\include\GL;Src\Library\OpenGL\glew\include\GL;Src\Library\OpenGL;Src;$(IncludePath)</IncludePath>
     <LibraryPath>Src\Library\FMOD\api\core\lib\x64;Src\Library\OpenGL\freeglut\lib\x64;Src\Library\OpenGL\glew\lib\Release\x64;Src\Library\cryptopp\lib;$(LibraryPath)</LibraryPath>
+    <TargetName>Eld Mart Slam</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
