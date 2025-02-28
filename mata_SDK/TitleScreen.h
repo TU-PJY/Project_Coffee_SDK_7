@@ -658,7 +658,7 @@ public:
 			TitleText.SetAlign(ALIGN_DEFAULT);
 			TitleText.SetHeightAlign(HEIGHT_ALIGN_DEFAULT);
 			TitleText.SetColor(1.0, 1.0, 1.0);
-			TitleText.Render(SDK::ASP(-1.0) + 0.01, -1.0 + 0.05, 0.1, L"Version %.1f", APPLICATION_VERSION);
+			TitleText.Render(SDK::ASP(-1.0) + 0.01, -1.0 + 0.05, 0.1, L"Version %.1f.1", APPLICATION_VERSION);
 		}
 	}
 
