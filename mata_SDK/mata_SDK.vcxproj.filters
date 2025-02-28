@@ -554,6 +554,7 @@
     <ClInclude Include="CreditMode.h">
       <Filter>[1]___________[ GameMode ]\[1]_[ Modes ]</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ModeTemplate.txt">
@@ -621,5 +622,11 @@
     <None Include="SDKResource\GLSL\4.3\Fragment_Shape.glsl">
       <Filter>[5]___________[ SDK_System ]\[ Shader ]\[ GLSL ]\[ 4.3 ]</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="mata_SDK.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Icon\icon.ico" />
   </ItemGroup>
 </Project>

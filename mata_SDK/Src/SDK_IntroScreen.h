@@ -143,7 +143,7 @@ public:
 
 		else {
 			Text.SetOpacity(BackGroundOpacity);
-			Text.Render(0.0, 0.0, 0.1, L"본 게임은 '트릭컬:리바이브' 팬게임으로, \n해당 게임의 캐릭터에 대한 모든 권한은\nEPIDGames가 소유함을 알립니다.\n\n(C)2024 EPIDGames. All Rights Reserved.");
+			Text.Render(0.0, 0.0, 0.1, L"본 게임은 '트릭컬:리바이브' 팬게임으로, \n해당 게임의 캐릭터에 대한 모든 권한은\nEPIDGames가 소유함을 알립니다.\n\n(C)2025 EPIDGames. All Rights Reserved.");
 		}
 
 	}

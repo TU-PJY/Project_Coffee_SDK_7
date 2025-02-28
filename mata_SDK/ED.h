@@ -357,6 +357,7 @@ public:
 			TiltValue = 0.0;
 			AnimationSize = 0.0;
 			BreatheSize = 0.0;
+			HRotation = 0.0;
 
 			Frame = ED_GameOver;
 

@@ -206,6 +206,7 @@
     <ClInclude Include="Pillar.h" />
     <ClInclude Include="PlayMode.h" />
     <ClInclude Include="PlayModeManager.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Shelf.h" />
     <ClInclude Include="Smoke.h" />
@@ -286,6 +287,12 @@
     <None Include="SDKResource\GLSL\4.6\Fragment_Shape.glsl" />
     <None Include="SDKResource\GLSL\4.6\Fragment_Text.glsl" />
     <None Include="SDKResource\GLSL\4.6\Vertex.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="mata_SDK.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Icon\icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
